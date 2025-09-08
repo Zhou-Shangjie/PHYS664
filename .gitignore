@@ -1,0 +1,11 @@
+*.aux
+*.fls
+*.log
+*.out
+*.fdb_latexmk
+.DS_Store
+hw1/hw1.pdf
+hw2/hw2.pdf
+hw3/hw3.pdf
+hw5/hw5.pdf
+hw6/hw6.pdf
