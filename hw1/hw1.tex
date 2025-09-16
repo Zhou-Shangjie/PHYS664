@@ -20,22 +20,49 @@
 
 
 \section*{Problem 1}
+\subsection*{(i)}
 For simplicity, we consider the case of swapping the $\alpha$-th and $\beta$-th electrons where $\alpha<\beta$.
 The term $\exp(-\sum_{i=1}^Nz_i \bar{z}_i/4l^2)$ is obviously symmetric under $\alpha\leftrightarrow \beta$.
-We only need to consider the terms involving $z_\alpha$ and $z_\beta$ in the term $\prod_{i<j}(z_i-z_j)^p$.
+We only need to consider the terms involving $z_\alpha$ and $z_\beta$ in $\prod_{i<j}(z_i-z_j)^p$, which are listed below:
 
-\begin{equation*}
-    \prod_{j>\beta}(z_\alpha-z_j)\prod_{j>\beta}(z_\beta-z_j)
-\end{equation*}
-
-
-\begin{equation}
-    \prod_{i<\alpha}(z_i-z_\alpha)\prod_{i<\beta}(z_i-z_\beta)
+\begin{equation}\label{eq:terms_1}
+    \prod_{j>\beta}(z_\alpha-z_j)^p\prod_{j>\beta}(z_\beta-z_j)^p
 \end{equation}
 
-\begin{equation}
-    \prod_{i>\alpha}
+
+\begin{equation}\label{eq:terms_2}
+    \prod_{i<\alpha}(z_i-z_\alpha)^p\prod_{i<\beta}(z_i-z_\beta)^p
 \end{equation}
+
+\begin{equation}\label{eq:terms_3}
+    \prod_{\beta>i>\alpha}(z_\beta-z_i)^p\prod_{\beta>i>\alpha}(z_i-z_\alpha)^p
+\end{equation}
+
+\begin{equation}\label{eq:terms_4}
+    (z_\beta-z_\alpha)^p
+\end{equation}
+After swapping $\alpha$ and $\beta$, we can see that \cref{eq:terms_1,eq:terms_2,eq:terms_3} are all symmetric, while \cref{eq:terms_4} changes sign.
+Therefore, the whole wave function changes sign after swapping two electrons, which means that the wave function is antisymmetric.
+
+\subsection*{(ii)}
+When $p=1$, the Laughlin wave function becomes
+\begin{equation}
+    \Psi(z_1,z_2,\ldots,z_N)=\prod_{i<j}(z_i-z_j)\exp\left(-\sum_{i=1}^Nz_i \bar{z}_i/4l^2\right)
+\end{equation}
+and it can be written as a Slater determinant:
+\begin{equation}
+    \Psi(z_1,z_2,\ldots,z_N)=\frac{1}{\sqrt{N!}}\begin{vmatrix}
+        \psi_{0,0}(z_1) & \psi_{0,0}(z_2) & \cdots & \psi_{0,0}(z_N)\\
+        \psi_{0,1}(z_1) & \psi_{0,1}(z_2) & \cdots & \psi_{0,1}(z_N)\\
+        \vdots & \vdots & \ddots & \vdots\\
+        \psi_{0,N-1}(z_1) & \psi_{0,N-1}(z_2) & \cdots & \psi_{0,N-1}(z_N)
+    \end{vmatrix}
+\end{equation}
+where $\psi_{0,m}(z)=\frac{1}{\sqrt{2\pi 2^m m! l^{2}}}\left(\frac{z}{l}\right)^m\exp(-|z|^2/4l^2)$ is the single-particle wave function in the lowest Landau level with angular momentum $m$.
+
+\section*{(iii)}
+
+\section*{(iv)}
 
 \section*{Problem 2}
 
