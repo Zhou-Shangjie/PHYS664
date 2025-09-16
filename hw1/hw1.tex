@@ -4,6 +4,7 @@
 \newcommand{\ii}{\mathrm{i}}
 \newcommand{\me}{\mathrm{e}}
 \newcommand{\cd}{\mathcal{D}}
+\counterwithout{equation}{section}
 
 
 \title{Homework 1}
@@ -18,14 +19,15 @@
 \maketitle
 
 
-\section{Problem 1}
+\section*{Problem 1}
 For simplicity, we consider the case of swapping the $\alpha$-th and $\beta$-th electrons where $\alpha<\beta$.
 The term $\exp(-\sum_{i=1}^Nz_i \bar{z}_i/4l^2)$ is obviously symmetric under $\alpha\leftrightarrow \beta$.
 We only need to consider the terms involving $z_\alpha$ and $z_\beta$ in the term $\prod_{i<j}(z_i-z_j)^p$.
 
-\begin{equation}
+\begin{equation*}
     \prod_{j>\beta}(z_\alpha-z_j)\prod_{j>\beta}(z_\beta-z_j)
-\end{equation}
+\end{equation*}
+
 
 \begin{equation}
     \prod_{i<\alpha}(z_i-z_\alpha)\prod_{i<\beta}(z_i-z_\beta)
@@ -35,6 +37,99 @@ We only need to consider the terms involving $z_\alpha$ and $z_\beta$ in the ter
     \prod_{i>\alpha}
 \end{equation}
 
+\section*{Problem 2}
+
+
+\section*{Problem 3}
+Consider the following Bogoliubov transformation:
+\begin{subequations}\label{eq:bogoliubov}
+    \begin{align}
+        a&=ub+v^*b^\dagger\\
+        a^\dagger&=u^*b^\dagger+vb
+    \end{align}
+\end{subequations}
+where $u$ and $v$ are complex numbers satisfying $|u|^2-|v|^2=1$.
+After plugging \cref{eq:bogoliubov} into the Hamiltonian, we have
+\begin{equation}
+    \begin{split}
+        H&=E_0\left[(u^2+v^2)b^\dagger b+uv(b^2+b^{\dagger 2})+v^2\right]+E_1\left[(u^2+v^2)(b^{\dagger 2}+b^2)+4uvb^\dagger b+2uv\right]\\
+         &= (E_0(u^2+v^2)+4E_1uv)b^\dagger b+(E_0uv+E_1(u^2+v^2))(b^2+b^{\dagger 2})+(E_0v^2+2E_1uv)
+    \end{split}
+\end{equation}
+
+To eliminate terms $b^2$ and $b^{\dagger 2}$, we need to set
+\begin{equation}
+    E_0uv+E_1(u^2+v^2)=0
+\end{equation}
+We can parametrize $u$ and $v$ as
+\begin{equation}
+    u=\cosh\theta, \quad v=\sinh\theta
+\end{equation}
+Then the condition becomes
+\begin{equation}
+    E_0\cosh\theta\sinh\theta+E_1(\cosh^2\theta+\sinh^2\theta)=0
+\end{equation}
+and the solution is
+\begin{equation}
+    \tanh 2\theta=-\frac{2E_1}{E_0}.
+\end{equation}
+Therefore, the Hamiltonian becomes
+\begin{equation}
+    H=\sqrt{E_0^2-4E_1^2}b^\dagger b+\frac{1}{2}(\sqrt{E_0^2-4E_1^2}-E_0)
+\end{equation}
+We can see that the new Hamiltonian is a harmonic oscillator with frequency $\sqrt{E_0^2-4E_1^2}$, so we can write down the energy levels directly:
+\begin{equation}
+    E_n=n\sqrt{E_0^2-4E_1^2}+\frac{1}{2}(\sqrt{E_0^2-4E_1^2}-E_0)
+\end{equation}
+where $n=0,1,2,\ldots$.
+
+\section*{Problem 4}
+The time evolution of the particle density operator is given by
+\begin{equation}
+    \pdv{t}\rho(\vb{r},t)=\ii\comm{H}{\rho(\vb{r},t)}
+\end{equation}
+We can plug in the following Hamiltonian and density operator:
+\begin{subequations}
+    \begin{align}
+        H&=H(t)=\sum_{\vb{k},\sigma}\epsilon_{\vb{k}}c_{\vb{k},\sigma}^\dagger c_{\vb{k},\sigma}\\
+        \rho(\vb{r},t)&=\frac{1}{V}\sum_{\vb{k},\vb{q},\sigma}\me^{-\ii\vb{q}\cdot \vb{r}}c_{\vb{k}+\vb{q},\sigma}^\dagger(t) c_{\vb{k},\sigma}(t)
+    \end{align}
+\end{subequations}
+Then we can compute
+\begin{equation}
+    \comm{H}{\rho(\vb{r},t)}=\frac{1}{V}\sum_{\vb{k},\vb{q},\vb{k}',\sigma,\sigma'}\me^{-\ii\vb{q}\cdot \vb{r}}\epsilon_{\vb{k}'}\comm{c_{\vb{k}',\sigma'}^\dagger(t) c_{\vb{k}',\sigma'}(t)}{c_{\vb{k}+\vb{q},\sigma}^\dagger(t) c_{\vb{k},\sigma}(t)}
+\end{equation}
+For the commutator, we have
+\begin{equation}
+    \begin{split}
+        &\comm{c_{\vb{k}',\sigma'}^\dagger(t) c_{\vb{k}',\sigma'}(t)}{c_{\vb{k}+\vb{q},\sigma}^\dagger(t) c_{\vb{k},\sigma}(t)}\\
+        =&c_{\vb{k}',\sigma'}^\dagger(t)\comm{c_{\vb{k}',\sigma'}(t)}{c_{\vb{k}+\vb{q},\sigma}^\dagger(t) c_{\vb{k},\sigma}(t)}+\comm{c_{\vb{k}',\sigma'}^\dagger(t)}{c_{\vb{k}+\vb{q},\sigma}^\dagger(t) c_{\vb{k},\sigma}(t)}c_{\vb{k}',\sigma'}(t)\\
+        =&c_{\vb{k}',\sigma'}^\dagger(t)\acomm{c_{\vb{k}',\sigma'}(t)}{c_{\vb{k}+\vb{q},\sigma}^\dagger(t)}c_{\vb{k},\sigma}(t)-c_{\vb{k}+\vb{q},\sigma}^\dagger(t)\acomm{c_{\vb{k}',\sigma'}^\dagger(t)}{c_{\vb{k},\sigma}(t)}c_{\vb{k}',\sigma'}(t)\\
+        =&\delta_{\vb{k}',\vb{k}+\vb{q}}\delta_{\sigma',\sigma}c_{\vb{k}',\sigma'}^\dagger(t)c_{\vb{k},\sigma}(t)-\delta_{\vb{k}',\vb{k}}\delta_{\sigma',\sigma}c_{\vb{k}+\vb{q},\sigma}^\dagger(t)c_{\vb{k}',\sigma'}(t)
+    \end{split}
+\end{equation}
+and after plugging it back, we have
+\begin{equation}\label{eq:rho-commutator}
+    \begin{split}
+        \pdv{t}\rho(\vb{r},t)&=\frac{\ii}{V}\sum_{\vb{k},\vb{q},\sigma}\me^{-\ii\vb{q}\cdot \vb{r}}(\epsilon_{\vb{k}+\vb{q}}-\epsilon_{\vb{k}})c_{\vb{k}+\vb{q},\sigma}^\dagger(t)c_{\vb{k},\sigma}(t)\\
+                             &=\frac{\ii}{mV}\sum_{\vb{k},\vb{q},\sigma}\me^{-\ii\vb{q}\cdot \vb{r}}\left(\vb{k}+\frac{1}{2}\vb{q}\right)\cdot\vb{q}c_{\vb{k}+\vb{q},\sigma}^\dagger(t)c_{\vb{k},\sigma}(t)
+    \end{split}
+\end{equation}
+where we have used free fermion energy $\epsilon_{\vb{k}}=\vb{k}^2/2m$ in the last step.
+
+On the other hand, we also have the current density operator defined as
+\begin{equation}
+    \vb{j}(\vb{r},t)=\frac{1}{mV}\sum_{\vb{k},\vb{q},\sigma}\me^{-\ii\vb{q}\cdot \vb{r}}\left(\vb{k}+\frac{1}{2}\vb{q}\right)c_{\vb{k}+\vb{q},\sigma}^\dagger(t)c_{\vb{k},\sigma}(t)
+\end{equation}
+and its divergence is
+\begin{equation}\label{eq:current-div}
+    \div{\vb{j}(\vb{r},t)}=\frac{-\ii}{mV}\sum_{\vb{k},\vb{q},\sigma}\me^{-\ii\vb{q}\cdot \vb{r}}\left(\vb{k}+\frac{1}{2}\vb{q}\right)\cdot \vb{q}c_{\vb{k}+\vb{q},\sigma}^\dagger(t)c_{\vb{k},\sigma}(t)
+\end{equation}
+
+If we add \cref{eq:rho-commutator} and \cref{eq:current-div}, we can see that the continuity equation is satisfied:
+\begin{equation}
+    \pdv{t}\rho(\vb{r},t)+\div{\vb{j}(\vb{r},t)}=0
+\end{equation}
 
 %\bibliographystyle{jhep}
 %\bibliography{ref}
