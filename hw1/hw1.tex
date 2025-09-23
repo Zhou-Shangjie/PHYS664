@@ -4,6 +4,7 @@
 \newcommand{\ii}{\mathrm{i}}
 \newcommand{\me}{\mathrm{e}}
 \newcommand{\cd}{\mathcal{D}}
+\DeclareMathOperator{\arcsinh}{arcsinh}
 \counterwithout{equation}{section}
 
 
@@ -44,6 +45,8 @@ We only need to consider the terms involving $z_\alpha$ and $z_\beta$ in $\prod_
 After swapping $\alpha$ and $\beta$, we can see that \cref{eq:terms_1,eq:terms_2,eq:terms_3} are all symmetric, while \cref{eq:terms_4} changes sign.
 Therefore, the whole wave function changes sign after swapping two electrons, which means that the wave function is antisymmetric.
 
+If $p$ is even, the wave function will be symmetric after swapping.
+In addition, it has translastion symmetry, rotation symmetry and reflection symmetry.
 \subsection*{(ii)}
 When $p=1$, the Laughlin wave function becomes
 \begin{equation}
@@ -51,7 +54,7 @@ When $p=1$, the Laughlin wave function becomes
 \end{equation}
 and it can be written as a Slater determinant:
 \begin{equation}
-    \Psi(z_1,z_2,\ldots,z_N)=\frac{1}{\sqrt{N!}}\begin{vmatrix}
+    \Psi(z_1,z_2,\ldots,z_N)\sim\begin{vmatrix}
         \psi_{0,0}(z_1) & \psi_{0,0}(z_2) & \cdots & \psi_{0,0}(z_N)\\
         \psi_{0,1}(z_1) & \psi_{0,1}(z_2) & \cdots & \psi_{0,1}(z_N)\\
         \vdots & \vdots & \ddots & \vdots\\
@@ -104,18 +107,122 @@ After expanding the polynomial, there are 5 kind of such monomials and we write 
 Therefore, we need 5 Slater determinants to represent the Laughlin wave function.
 
 \section*{Problem 2}
+For simplicity, we work with periodic boundary condition with period $L$, so there are $N=L/a$ lattice sites.
+Since there is a displacement $u$ for each site, the new lattice constant is $2a$, which will change the Brillouin zone.
 \subsection*{(i)}
 The total energy for the negative energy levels is
 \begin{equation}
     \begin{split}
-        E(u)&=-\int_{-\pi/a}^{\pi/a}\epsilon_k \dd{k}=-\int_{-\pi/a}^{\pi/a} \dd{k}\sqrt{\frac{v^2}{a^2}\cos[2](ka)+\Delta^2}\\
-            &=-2\int_{-\pi/2a}^{\pi/2a} \dd{k}\sqrt{\frac{v^2}{a^2}\cos[2](ka)+\Delta^2}\\
-            &=-2\int_{-\pi/a}^{0}\dd{p}\sqrt{\frac{v^2}{a^2}\sin[2](kp)+\Delta^2}\\
-            &=-2\int_{-\pi/2a}^{\pi/2a}\dd{p}\sqrt{\frac{v^2}{a^2}\sin[2](kp)+\Delta^2}\\
-            &=
+        E(u)&=-\frac{L}{2\pi}\int_{-\pi/2a}^{\pi/2a}\epsilon_k \dd{k}=-\frac{L}{2\pi}\int_{-\pi/2a}^{\pi/2a} \dd{k}\sqrt{\frac{v^2}{a^2}\cos[2](ka)+\Delta^2}\\
+            &=-\frac{L}{2\pi}\int_{-\pi/2a}^{\pi/2a}\dd{p}\sqrt{\frac{v^2}{a^2}\sin[2](ap)+\Delta^2}\\
+            &=-\frac{L\Delta}{\pi a}\int_0^{\pi/2}\dd{x}\sqrt{1+\frac{v^2}{a^2\Delta^2}\sin[2](x)}\\
+            &=-\frac{L\Delta}{\pi a}E\left(-\frac{v^2}{a^2\Delta^2}\right)
+    \end{split}
+\end{equation}
+where $E(m)=\int_0^{\pi/2}\dd{x}\sqrt{1-m\sin[2](x)}$ is the complete elliptic integral of the second kind.
+
+
+\subsection*{(ii)}
+When $\Delta\ll t_0$, we have $-v^2/a^2\Delta^2\gg 1$, and we can use the asymptotic form of $E(m)$ when $m\to -\infty$:
+\begin{equation}
+    E(m)=\sqrt{-m}+\frac{1}{4\sqrt{-m}}\left(\ln(-16m)-1\right)
+\end{equation}
+Therefore, we have 
+\begin{equation}
+    E(u)=-\frac{Lv}{\pi a^2}-\frac{\Delta^2 La}{4\pi v}\left(\ln\left(\frac{16v^2}{a^2\Delta^2}\right)-1\right)
+\end{equation}
+
+\subsection*{(iii)}
+If we use the approximated form of $\epsilon_p\approx\tilde{\epsilon}_p=\pm\sqrt{v^2 p^2+\Delta^2}$, the total energy for the negative energy levels is
+\begin{equation}
+    \begin{split}
+        \tilde{E}(u)&=-\frac{L}{2\pi}\int_{-\pi/2a}^{\pi/2a}\dd{p}\sqrt{v^2 p^2+\Delta^2}\\
+                    &=\frac{L}{2\pi}\eval{\frac{pv\sqrt{p^2 v^2+\Delta^2}+\Delta^2\arcsinh(\frac{pv}{\Delta})}{2v}}_{-\pi/2a}^{\pi/2a}\\
+                    &=\frac{\pi L\sqrt{\pi^2 v^2+4\Delta^2 a^2}}{8\pi a^2}+\frac{\Delta^2 L}{2\pi v}\arcsinh(\frac{\pi v}{2a\Delta})
+    \end{split}
+\end{equation}
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{plot/plot1.pdf}
+\end{center}
+
+\subsection*{(iv)}
+The total energy is the sum of electron energy and elastic energy:
+\begin{subequations}
+    \begin{align}
+        E_{tot}(u)&=E(u)+E_{el}(u)= -\frac{L\Delta}{\pi a}E\left(-\frac{v^2}{a^2\Delta^2}\right)+\frac{L\kappa u^2}{2a}\\
+    \tilde{E}_{tot}(u)&=\tilde{E}(u)+E_{el}(u)= \frac{\pi L\sqrt{\pi^2 v^2+4\Delta^2 a^2}}{8\pi a^2}+\frac{\Delta^2 L}{2\pi v}\arcsinh(\frac{\pi v}{2a\Delta})+\frac{L\kappa u^2}{2a}
+    \end{align}
+\end{subequations}
+If we want to minimize the total energy, we need to set $\pdv{E_{tot}}{u}=0$ or $\pdv{\tilde{E}_{tot}}{u}=0$.
+
+
+
+\subsection*{(v)}
+Since there are two bands, the partition function of noninteracting fermions is
+\begin{equation}
+    Z=\prod_k(1+\me^{-\epsilon_k/T})(1+\me^{\epsilon_k/T})
+\end{equation}
+To compute the free energy, we have 
+\begin{equation}
+    \begin{split}
+        F(\Delta)&=-T\log Z\\
+                 &=-T\sum_k\log((1+\me^{-\epsilon_k/T})(1+\me^{\epsilon_k/T}))\\
+                 &=-T\sum_k\log(2+2\cosh(\epsilon_k/T))\\
+                 &=-T\sum_k\log(4\cosh[2](\epsilon_k/2T))\\
+                 &=-T\int_{-\pi/2a}^{\pi/2a}\frac{L\dd{p}}{2\pi}\log(4\cosh[2](\epsilon_p/2T))\\
+                 &=-T\log(4)\frac{L}{a}-2T\int_{-\pi/2a}^{\pi/2a}\frac{L\dd{p}}{2\pi}\log(\cosh(\frac{1}{2T}\sqrt{\frac{v^2}{a^2}\sin[2](ap)+\Delta^2}))\\
     \end{split}
 \end{equation}
 
+
+\subsection*{(vi)}
+The elastic energy is 
+\begin{equation}
+    E_{el}=N\frac{\kappa u^2}{2}=\frac{L\kappa u^2}{2a}
+\end{equation}
+where $\kappa$ is the elastic constant.
+After using $\Delta=2\alpha\abs{u}$, we have 
+\begin{equation}
+    E_{el}=\frac{L\kappa a\Delta^2}{8\alpha^2}
+\end{equation}
+
+\subsection*{(vii)}
+The energy that we need to minimize is
+\begin{equation}
+    E_{tot}(\Delta)=F(\Delta)+E_{el}(\Delta)= -T\log(4)\frac{L}{a}-2T\int_{-\pi/2a}^{\pi/2a}\frac{L\dd{p}}{2\pi}\log(\cosh(\frac{1}{2T}\sqrt{\frac{v^2}{a^2}\sin[2](ap)+\Delta^2}))+\frac{L\kappa a\Delta^2}{8\alpha^2}
+\end{equation}
+To find the minimum, we set $\pdv{E_{tot}}{\Delta}=0$:
+\begin{equation}\label{eq:gap-eq}
+    \frac{L}{\pi}\int_{-\pi/2a}^{\pi/2a}\dd{p}\frac{1}{\sqrt{\frac{v^2}{a^2}\sin[2](ap)+\Delta^2}}\tanh(\frac{1}{2T}\sqrt{\frac{v^2}{a^2}\sin[2](ap)+\Delta^2})+\frac{L\kappa a}{4\alpha^2}=0
+\end{equation}
+
+\subsection*{(viii)}
+Since when $T=T_c$, we have $\Delta=0$, we can just set $\Delta=0$ in the equation above:
+\begin{equation}
+    \frac{L}{\pi}\int_{-\pi/2a}^{\pi/2a}\dd{p}\frac{1}{\abs{\frac{v}{a}\sin(ap)}}\tanh(\frac{1}{2T_c}\abs{\frac{v}{a}\sin(ap)})+\frac{L\kappa a}{4\alpha^2}=0
+\end{equation}
+
+\subsection*{(ix)}
+When $T\to 0$, \cref{eq:gap-eq} becomes
+\begin{equation}\label{eq:zero-temp-gap-eq}
+    \frac{L}{\pi}\int_{-\pi/2a}^{\pi/2a}\dd{p}\frac{1}{\sqrt{\frac{v^2}{a^2}\sin[2](ap)+\Delta(0)^2}}+\frac{L\kappa a}{4\alpha^2}=0
+\end{equation}
+Notice that when $\Delta(0)$ is small, \cref{eq:zero-temp-gap-eq} can be expanded to the leading order of $\Delta(0)$:
+\begin{equation}
+    \frac{L}{\pi}\int_{-\pi/2a}^{\pi/2a}\dd{p}\frac{1}{\abs{\frac{v}{a}\sin(ap)}}-\frac{L\Delta(0)^2}{2\pi}\int_{-\pi/2a}^{\pi/2a}\dd{p}\frac{1}{\abs{\frac{v}{a}\sin(ap)}^3}+\frac{L\kappa a}{4\alpha^2}=0
+\end{equation}
+When $T_c$ is small, we can also expand the equation for $T_c$ to the leading order of $T_c$:
+\begin{equation}
+    \frac{L}{\pi}\int_{-\pi/2a}^{\pi/2a}\dd{p}\frac{1}{\abs{\frac{v}{a}\sin(ap)}}-\frac{L}{2\pi T_c}\int_{-\pi/2a}^{\pi/2a}\dd{p}\frac{1}{\abs{\frac{v}{a}\sin(ap)}^2}+\frac{L\kappa a}{4\alpha^2}=0
+\end{equation} 
+After comparing the two equations, we have
+\begin{equation}
+    \Delta(0)^2=2\pi^2 T_c^2\frac{\int_{-\pi/2a}^{\pi/2a}\dd{p}\frac{1}{\abs{\frac{v}{a}\sin(ap)}^3}}{\int_{-\pi/2a}^{\pi/2a}\dd{p}\frac{1}{\abs{\frac{v}{a}\sin(ap)}^2}}
+\end{equation}
+so the ratio between $\Delta(0)$ and $T_c$ is
+\begin{equation}
+    \frac{\Delta(0)}{T_c}=\pi\sqrt{2\frac{\int_{-\pi/2a}^{\pi/2a}\dd{p}\frac{1}{\abs{\frac{v}{a}\sin(ap)}^3}}{\int_{-\pi/2a}^{\pi/2a}\dd{p}\frac{1}{\abs{\frac{v}{a}\sin(ap)}^2}}}
+\end{equation}
 
 \section*{Problem 3}
 Consider the following Bogoliubov transformation:
