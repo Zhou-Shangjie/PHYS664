@@ -21,7 +21,173 @@
 
 
 \section*{Problem 1}
-\subsection*{(i)}
+\subsection*{(a)}
+When $t>t'$,
+\begin{equation}
+    \theta(t-t')G^{>}(t-t')+\theta(t'-t)G^{<}(t-t')=G^{>}(t-t')=-\ii\expval{c(t)c^{\dagger}(t')}.
+\end{equation}
+When $t<t'$,
+\begin{equation}
+    \theta(t-t')G^{>}(t-t')+\theta(t'-t)G^{<}(t-t')=G^{<}(t-t')=\ii\expval{c^{\dagger}(t')c(t)}.
+\end{equation}
+Therefore, we have 
+\begin{equation}
+    G^{T}(t-t')=\theta(t-t')G^{>}(t-t')+\theta(t'-t)G^{<}(t-t').
+\end{equation}
+
+\subsection*{(b)}
+We first write down the Fourier transform of $G^{>}(t-t')$ and $G^{<}(t-t')$:
+\begin{subequations}
+    \begin{align}
+        G^{>}(t-t')&=\int_{-\infty}^{+\infty}\frac{\dd{\omega}}{2\pi}G^{>}(\omega)\me^{-\ii\omega(t-t')},\\
+        G^{<}(t-t')&=\int_{-\infty}^{+\infty}\frac{\dd{\omega}}{2\pi}G^{<}(\omega)\me^{-\ii\omega(t-t')}.
+    \end{align}
+\end{subequations}
+Then the Fourier transform of $G^{T}(t-t')$ is
+\begin{equation}
+    \begin{split}
+        G^{T}(\omega)&=\int_{-\infty}^{+\infty}\dd{t}G^{T}(t)\me^{\ii\omega(t)}\\
+        &=\int_{-\infty}^{+\infty}\dd{t}\qty[\theta(t)G^{>}(t)+\theta(-t)G^{<}(t)]\me^{\ii\omega t}\\
+        &=\int_{-\infty}^{+\infty}\dd{t}\qty[\theta(t)\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}G^{>}(\omega')\me^{-\ii\omega' t}+\theta(-t)\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}G^{<}(\omega')\me^{-\ii\omega' t}]\me^{\ii\omega t}\\
+        &=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}G^{>}(\omega')\int_{0}^{+\infty}\dd{t}\me^{\ii(\omega-\omega')t}+\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}G^{<}(\omega')\int_{-\infty}^{0}\dd{t}\me^{\ii(\omega-\omega')t}\\
+        &=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\qty[\frac{\ii G^{>}(\omega')}{\omega-\omega'+\ii0^{+}}+\frac{\ii G^{<}(\omega')}{\omega-\omega'-\ii0^{+}}]
+    \end{split}
+\end{equation}
+
+\subsection*{(c)}
+We will use the following identity of the spectral function when temperature is zero:
+\begin{subequations}
+    \begin{align}
+        A(\omega)&=A^{>}(\omega)+A^{<}(\omega)\\
+        G^{>}(\omega)&=-\ii A^{>}(\omega)\\
+        G^{<}(\omega)&=-\ii A^{<}(\omega)\\
+        G^{R}(\omega)&= \int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\frac{A(\omega)}{\omega-\omega'+\ii0^{+}}\\
+        G^{A}(\omega)&= \int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\frac{A(\omega)}{\omega-\omega'-\ii0^{+}}
+    \end{align}
+\end{subequations}
+
+Now $G^{T}(\omega)$ can be written as
+\begin{equation}
+    G^{T}(\omega)=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\qty[\frac{A^{>}(\omega')}{\omega-\omega'+\ii0^{+}}+\frac{A^{<}(\omega')}{\omega-\omega'-\ii0^{+}}].
+\end{equation}
+
+When $\omega$ is on the upper half plane, we have 
+\begin{equation}
+    G^{T}(\omega)=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\qty[\frac{A^{>}(\omega')}{\omega-\omega'}+\frac{A^{<}(\omega')}{\omega-\omega'}]=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\frac{A(\omega')}{\omega-\omega'}=G^R(\omega)
+\end{equation}
+in the last step we used the fact the imaginary part of $\omega$ is positive.
+Using the same argument, when $\omega$ is on the lower half plane, we have $G^{T}(\omega)=G^{A}(\omega)$.
+
+\subsection*{(d)}
+For the anti-time-ordered Green's function, we have
+\begin{equation}
+    G^{\tilde{T}}(t-t')=\theta(t'-t)G^{>}(t-t')+\theta(t-t')G^{<}(t-t')
+\end{equation}
+and its Fourier transform can be written in terms of the spectral function as
+\begin{equation}
+    G^{\tilde{T}}(\omega)=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\qty[\frac{A^{>}(\omega')}{\omega-\omega'+\ii0^{+}}+\frac{A^{<}(\omega')}{\omega-\omega'-\ii0^{+}}].
+\end{equation}
+
+
+\section*{Problem 2}
+\subsection*{(a)}
+To get the imaginary part of the retarded Green's function, we can rewrite it as 
+\begin{equation}
+    G^{R}(\vb{r},\vb{r}';\omega)=\sum_{\alpha}\frac{\phi_\alpha(\vb{r})\phi^\ast_\alpha(\vb{r}')}{\omega-E_\alpha+\ii 0^+}=\lim_{\epsilon\to 0^+}\sum_{\alpha}\frac{\phi_\alpha(\vb{r})\phi^\ast_\alpha(\vb{r}')}{\omega-E_\alpha+\ii\epsilon}=\lim_{\epsilon\to 0^+}\sum_\alpha \frac{\phi_\alpha(\vb{r})\phi_\alpha^*(\vb{r'})(\omega-E_\alpha-\ii \epsilon)}{(\omega-E_\alpha)^2+\epsilon^2}.
+\end{equation}
+Now we can see that the imaginary part is
+\begin{equation}
+    \Im G^{R}(\vb{r},\vb{r}';\omega)=\sum_\alpha \frac{-\ii \epsilon\phi_\alpha(\vb{r})\phi_\alpha^*(\vb{r'})}{(\omega-E_\alpha)^2+\epsilon^2}.
+\end{equation}
+So the imaginary part of the retarded Green's function is related to the eigenmodes and eigenenergies.
+
+\subsection*{(b)}
+Using the identity 
+\begin{equation}
+    \frac{1}{x\pm \ii 0^+}=\mathcal{P}\frac{1}{x}\mp \ii \pi \delta(x),
+\end{equation}
+the retarded Green's function can be rewritten as
+\begin{equation}
+    G^{R}(\vb{r},\vb{r}';\omega)=\sum_{\alpha}\phi_\alpha(\vb{r})\phi_\alpha^*(\vb{r'})\qty[\mathcal{P}\frac{1}{\omega-E_\alpha}-\ii \pi \delta(\omega-E_\alpha)].
+\end{equation}
+and the imaginary part is
+\begin{equation}
+    \Im G^{R}(\vb{r},\vb{r}';\omega)=-\pi \sum_{\alpha}\phi_\alpha(\vb{r})\phi_\alpha^*(\vb{r'})\delta(\omega-E_\alpha)
+\end{equation}
+and we can see that 
+\begin{equation}
+    -\frac{1}{\pi}\Im G^{R}(\vb{r},\vb{r};\omega)=\sum_{\alpha}\abs{\phi_\alpha(\vb{r})}^2\delta(\omega-E_\alpha)=\rho(\vb{r},\omega)
+\end{equation}
+
+\subsection*{(c)}
+After integrating over $\vb{r}$, we have
+\begin{equation}
+    \rho(\omega)=\int \dd{\vb{r}}\rho(\vb{r},\omega)=-\frac{1}{\pi}\int \dd{\vb{r}}\Im G^{R}(\vb{r},\vb{r};\omega)=-\frac{1}{\pi}\Im \Tr G^{R}(\omega).
+\end{equation}
+where $\int \dd{\vb{r}}G^{R}(\vb{r},\vb{r};\omega)=\Tr G^{R}(\omega)$.
+
+\subsection*{(d)}
+For a free particle in $d$ dimensions, the retarded Green's function can be expressed as
+\begin{equation}
+    G^{R}(\vb{r},\vb{r}';\omega)=\int \frac{\dd{\vb{k}}}{(2\pi)^d}\frac{e^{i\vb{k}\cdot(\vb{r}-\vb{r'})}}{\omega-E_{\vb{k}}+\ii 0^+},
+\end{equation}
+where $E_{\vb{k}}=\frac{\hbar^2 k^2}{2m}$ is the energy dispersion relation for a free particle.
+The trace of the retarded Green's function is
+\begin{equation}
+    \Tr G^{R}(\omega)=\int \dd{\vb{r}}G^{R}(\vb{r},\vb{r};\omega)=\int \dd{\vb{r}}\int \frac{\dd{\vb{k}}}{(2\pi)^d}\frac{1}{\omega-E_{\vb{k}}+\ii 0^+}=V\int \frac{\dd{\vb{k}}}{(2\pi)^d}\frac{1}{\omega-E_{\vb{k}}+\ii 0^+},
+\end{equation}
+where $V$ is the volume of the system.
+Now we can calculate the density of states:
+\begin{equation}
+    \rho(\omega)=-\frac{1}{\pi}\Im \Tr G^{R}(\omega)=-\frac{V}{\pi}\Im \int \frac{\dd{\vb{k}}}{(2\pi)^d}\frac{1}{\omega-E_{\vb{k}}+\ii 0^+}=\frac{V}{\pi}\int \frac{\dd{\vb{k}}}{(2\pi)^d}\pi \delta(\omega-E_{\vb{k}}).
+\end{equation}
+By using the volume of the $d$-dimensional sphere:
+\begin{equation}
+    \int \dd{\Omega_d}=\frac{2\pi^{d/2}}{\Gamma(d/2)}.
+\end{equation}
+the above integral can be evaluated as
+\begin{equation}
+    \rho(\omega)=\frac{V}{(2\pi)^d}\frac{2\pi^{d/2}}{\Gamma(d/2)}\int_0^{+\infty} k^{d-1}\dd{k}\delta(\omega-E_{\vb{k}}).
+\end{equation}
+Using the property of the delta function, we have
+\begin{equation}
+    \delta(\omega-E_{\vb{k}})=\delta\qty(\omega-\frac{\hbar^2 k^2}{2m})=\frac{m}{\hbar^2 k}\delta\qty(k-\sqrt{\frac{2m\omega}{\hbar^2}}).
+\end{equation}
+So the density of states is
+\begin{equation}
+    \rho(\omega)=\frac{V}{(2\pi)^d}\frac{2\pi^{d/2}}{\Gamma(d/2)}\int_0^{+\infty} k^{d-1}\dd{k}\frac{m}{\hbar^2 k}\delta\qty(k-\sqrt{\frac{2m\omega}{\hbar^2}})=\frac{V}{(2\pi)^d}\frac{2\pi^{d/2}}{\Gamma(d/2)}\frac{m}{\hbar^2}\qty(\sqrt{\frac{2m\omega}{\hbar^2}})^{d-2}
+\end{equation}
+which can be simplified to
+\begin{equation}
+    \rho(\omega)=V\qty(\frac{m}{2\pi \hbar^2})^{d/2}\frac{1}{\Gamma(d/2)}\omega^{d/2-1}.
+\end{equation}
+
+On the other hand, the density of states can also be calculated by counting the number of states in a volume of $k$-space:
+\begin{equation}
+    \rho(\omega)=\dv{N}{\omega}=\dv{N}{k}\dv{k}{\omega}.
+\end{equation}
+The number of states in a volume of $k$-space is
+\begin{equation}
+    N=\frac{V}{(2\pi)^d}\int \dd{\Omega_d}\int_0^k k'^{d-1}\dd{k'}=\frac{V}{(2\pi)^d}\frac{2\pi^{d/2}}{\Gamma(d/2)}\frac{k^d}{d}.
+\end{equation}
+where $V/(2\pi)^d$ is the density of states in $k$-space.
+So we have
+\begin{equation}
+    \dv{N}{k}=\frac{V}{(2\pi)^d}\frac{2\pi^{d/2}}{\Gamma(d/2)}k^{d-1}.
+\end{equation}
+The derivative of $k$ with respect to $\omega$ is
+\begin{equation}
+    \dv{k}{\omega}=\dv{}{\omega}\sqrt{\frac{2m\omega}{\hbar^2}}=\sqrt{\frac{m}{2\hbar^2}}\omega^{-1/2}.
+\end{equation}
+Therefore, the density of states is
+\begin{equation}
+    \rho(\omega)=\frac{V}{(2\pi)^d}\frac{2\pi^{d/2}}{\Gamma(d/2)}k^{d-1}\sqrt{\frac{m}{2\hbar^2}}\omega^{-1/2}=\frac{V}{(2\pi)^d}\frac{2\pi^{d/2}}{\Gamma(d/2)}\qty(\sqrt{\frac{2m\omega}{\hbar^2}})^{d-1}\sqrt{\frac{m}{2\hbar^2}}\omega^{-1/2}
+\end{equation}
+which can be simplified to
+\begin{equation}
+    \rho(\omega)=V\qty(\frac{m}{2\pi \hbar^2})^{d/2}\frac{1}{\Gamma(d/2)}\omega^{d/2-1}.
+\end{equation}
+We can see that the density of states calculated by the two methods are consistent.
 
 %\bibliographystyle{jhep}
 %\bibliography{ref}
