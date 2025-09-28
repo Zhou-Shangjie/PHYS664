@@ -189,6 +189,129 @@ which can be simplified to
 \end{equation}
 We can see that the density of states calculated by the two methods are consistent.
 
+
+
+\section*{Problem 3}
+\subsection*{(a)}
+We will first calculate the following commutator:
+\begin{equation}
+    \begin{split}
+        \comm{d}{H}=&\sum_{k}\epsilon_k \comm{d}{c_k^\dagger c_k}+\epsilon_d \comm{d}{d^\dagger d}+V\sum_k \comm{d}{c_k^\dagger d}+V\sum_k \comm{d}{d^\dagger c_k}\\
+    \end{split}
+\end{equation}
+Notice that 
+\begin{equation}
+    \comm{d}{c_k^\dagger c_k}=d c_k^\dagger c_k - c_k^\dagger c_k d=d c_k^\dagger c_k-d c_k^\dagger c_k=0,
+\end{equation}
+\begin{equation}
+    \comm{d}{d^\dagger d}=d d^\dagger d - d^\dagger d d=dd^\dagger d=d\acomm{d^\dagger}{d}-ddd^\dagger=d,
+\end{equation}
+\begin{equation}
+    \comm{d}{c_k^\dagger d}=d c_k^\dagger d - c_k^\dagger d d=0,
+\end{equation}
+\begin{equation}
+    \comm{d}{d^\dagger c_k}=d d^\dagger c_k - d^\dagger c_k d=dd^\dagger c_k + d^\dagger d c_k=\acomm{d}{d^\dagger}c_k=c_k.
+\end{equation}
+so we have
+\begin{equation}
+    \comm{d}{H}=\epsilon_d d + V\sum_k c_k.
+\end{equation}
+
+Similarly, we can calculate the commutator $\comm{c_k}{H}$:
+\begin{equation}
+    \comm{c_k}{H}=\epsilon_k c_k + V d.
+\end{equation}
+
+Therefore, the EOMs are 
+\begin{subequations}
+    \begin{align}
+        \ii \dv{t}d(t)&=\comm{d(t)}{H}=\epsilon_d d(t) + V\sum_k c_k(t),\\
+        \ii \dv{t}c_k(t)&=\comm{c_k(t)}{H}=\epsilon_k c_k(t) + V d(t).
+    \end{align}
+\end{subequations}
+
+If we write a time ordered Green's function as
+\begin{equation}
+    \expval{T A(t)B(0)}=\theta(t)\expval{A(t)B(0)}- \theta(-t)\expval{B(0)A(t)},
+\end{equation}
+then its time derivative is
+\begin{equation}
+    \begin{split}
+        \dv{t}\expval{T A(t)B(0)}&=\delta(t)\qty(\expval{A(t)B(0)}+\expval{B(0)A(t)})+\theta(t)\expval{\dv{t}A(t)B(0)}-\theta(-t)\expval{B(0)\dv{t}A(t)}\\
+                                 &=\delta(t)\expval{\acomm{A(t)}{B(0)}}+\expval{T\dv{A(t)}{t}B(0)}\\
+                                 &=\delta(t)\expval{\acomm{A(0)}{B(0)}}+\expval{T\dv{A(t)}{t}B(0)}
+    \end{split}
+\end{equation}
+
+For the time ordered Green's function, we have the following EOM after differentiation:
+\begin{equation}
+    \begin{split}\label{eq:3a1}
+        \dv{t}G_d(t)&=-\ii\delta(t)-\ii\expval{T \qty(\dv{t}d(t))d^\dagger(0)}\\
+                    &=-\ii\delta(t)-\expval{T(\epsilon_d d(t) + V\sum_k c_k(t))d^\dagger(0)}\\
+                    &=-\ii\delta(t)-\ii \epsilon_d G_d(t)-\ii V\sum_k G_{ck}(t)
+    \end{split}
+\end{equation}
+
+\begin{equation}
+    \begin{split}\label{eq:3a2}
+        \dv{t}G_{c_k,d^\dagger}(t)&=-\ii\expval{T \qty(\dv{t}c_k(t))d^\dagger(0)}\\
+                                  &=-\expval{T(\epsilon_k c_k(t) + V d(t))d^\dagger(0)}\\
+                                  &=-\ii \epsilon_k G_{c_k,d^\dagger}(t)-\ii V G_d(t)
+    \end{split}
+\end{equation}
+After substituting the Fourier transform of the Green's functions, \cref{eq:3a1,eq:3a2} become
+\begin{equation}
+    \omega G_d(\omega)=1+\epsilon_d G_d(\omega)+V\sum_k G_{c_k,d^\dagger}(\omega)
+\end{equation}
+\begin{equation}
+    \omega G_{c_k,d^\dagger}(\omega)=\epsilon_k G_{c_k,d^\dagger}(\omega)+V G_d(\omega)
+\end{equation}
+Now $G_d(\omega)$ can be solved:
+\begin{equation}
+    G_d(\omega)=\frac{1}{\omega-\epsilon_d-V^2\sum_k \frac{1}{\omega-\epsilon_k}}=\frac{G_{d,0}(\omega)}{1-G_{d,0}(\omega)\Delta(\omega)},
+\end{equation}
+where $G_{d,0}(\omega)=\frac{1}{\omega-\epsilon_d}$ and $\Delta(\omega)=V^2\sum_k \frac{1}{\omega-\epsilon_k}$.
+So $G_d(\omega)$ satisfies a Dyson-like equation.
+
+\subsection*{(b)}
+We can write the self-energy as
+\begin{equation}
+    \Sigma(\omega)=V^2\sum_k \frac{1}{\omega-\epsilon_k+ \ii 0^+}=\int \dd{k}\frac{V^2 \rho(\epsilon_k)}{\omega-\epsilon_k+ \ii 0^+}.
+\end{equation}
+To extract the imaginary part of the self-energy, we can use the identity
+\begin{equation}
+    \frac{1}{x\pm \ii 0^+}=\mathcal{P}\frac{1}{x}\mp \ii \pi \delta(x),
+\end{equation}
+so we have
+\begin{equation}
+    \Sigma(\omega)=\int \dd{k}\frac{V^2 \rho(\epsilon_k)}{\omega-\epsilon_k+ \ii 0^+}=\int \dd{k}\frac{V^2 \rho(\epsilon_k)}{\omega-\epsilon_k}-\ii \pi V^2 \rho(\omega),
+\end{equation}
+and in the wide-band limite $\rho(\epsilon)=\rho_0$, we have
+\begin{equation}
+    \Delta(\omega)\simeq -\ii\Gamma,
+\end{equation}
+up to a constant real part and $\Gamma=\pi V^2 \rho_0$.
+
+\subsection*{(c)}
+In the wide-band limit, the impurity Green's function is
+\begin{equation}
+    G^R_d(\omega)=\frac{1}{\omega-\epsilon_d+\ii \Gamma}.
+\end{equation}
+which can be rewritten as 
+\begin{equation}
+    G^R_d(\omega)=\frac{\omega-\epsilon_d-\ii \Gamma}{(\omega-\epsilon_d)^2+\Gamma^2}.
+\end{equation}
+and we can compute the spectral function: 
+\begin{equation}
+    A_d(\omega)=-\frac{1}{\pi}\Im G^R_d(\omega)=\frac{1}{\pi}\frac{\Gamma}{(\omega-\epsilon_d)^2+\Gamma^2}.
+\end{equation}
+
+\subsection*{(d)}
+To verify that $A_d(\omega)$ reduces to a Dirac delta function, we can compute the following integral:
+\begin{equation}
+    \int_{-\infty}^{+\infty} A_d(\omega)\dd{\omega}=\int_{-\infty}^{+\infty}\frac{1}{\pi}\frac{\Gamma}{(\omega-\epsilon_d)^2+\Gamma^2}\dd{\omega}=\frac{1}{\pi}\qty[\arctan\frac{\omega-\epsilon_d}{\Gamma}]_{-\infty}^{+\infty}=1. 
+\end{equation}
+
 %\bibliographystyle{jhep}
 %\bibliography{ref}
 \end{document}
