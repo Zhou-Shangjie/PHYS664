@@ -5,6 +5,7 @@
 \newcommand{\me}{\mathrm{e}}
 \newcommand{\cd}{\mathcal{D}}
 \DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\sgn}{sgn}
 \counterwithout{equation}{section}
 
 
@@ -50,7 +51,7 @@ Then the Fourier transform of $G^{T}(t-t')$ is
         &=\int_{-\infty}^{+\infty}\dd{t}\qty[\theta(t)G^{>}(t)+\theta(-t)G^{<}(t)]\me^{\ii\omega t}\\
         &=\int_{-\infty}^{+\infty}\dd{t}\qty[\theta(t)\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}G^{>}(\omega')\me^{-\ii\omega' t}+\theta(-t)\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}G^{<}(\omega')\me^{-\ii\omega' t}]\me^{\ii\omega t}\\
         &=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}G^{>}(\omega')\int_{0}^{+\infty}\dd{t}\me^{\ii(\omega-\omega')t}+\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}G^{<}(\omega')\int_{-\infty}^{0}\dd{t}\me^{\ii(\omega-\omega')t}\\
-        &=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\qty[\frac{\ii G^{>}(\omega')}{\omega-\omega'+\ii0^{+}}+\frac{\ii G^{<}(\omega')}{\omega-\omega'-\ii0^{+}}]
+        &=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi\ii}\qty[-\frac{G^{>}(\omega')}{\omega-\omega'+\ii0^{+}}+\frac{ G^{<}(\omega')}{\omega-\omega'-\ii0^{+}}]
     \end{split}
 \end{equation}
 
@@ -58,22 +59,21 @@ Then the Fourier transform of $G^{T}(t-t')$ is
 We will use the following identity of the spectral function when temperature is zero:
 \begin{subequations}
     \begin{align}
-        A(\omega)&=A^{>}(\omega)+A^{<}(\omega)\\
-        G^{>}(\omega)&=-\ii A^{>}(\omega)\\
-        G^{<}(\omega)&=-\ii A^{<}(\omega)\\
-        G^{R}(\omega)&= \int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\frac{A(\omega)}{\omega-\omega'+\ii0^{+}}\\
-        G^{A}(\omega)&= \int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\frac{A(\omega)}{\omega-\omega'-\ii0^{+}}
+        G^{>}(\omega)&=-2\pi\ii A(\omega)\theta(\omega)\\
+        G^{<}(\omega)&=2\pi\ii A(\omega)\theta(-\omega)\\
+        G^{R}(\omega)&= \int_{-\infty}^{+\infty}\dd{\omega'}\frac{A(\omega)}{\omega-\omega'+\ii0^{+}}\\
+        G^{A}(\omega)&= \int_{-\infty}^{+\infty}\dd{\omega'}\frac{A(\omega)}{\omega-\omega'-\ii0^{+}}
     \end{align}
 \end{subequations}
 
 Now $G^{T}(\omega)$ can be written as
 \begin{equation}
-    G^{T}(\omega)=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\qty[\frac{A^{>}(\omega')}{\omega-\omega'+\ii0^{+}}+\frac{A^{<}(\omega')}{\omega-\omega'-\ii0^{+}}].
+    G^{T}(\omega)=\int_{-\infty}^{+\infty}\dd{\omega'}\frac{A(\omega')}{\omega-\omega'+\sgn(\Im(\omega))\ii 0^+}
 \end{equation}
 
 When $\omega$ is on the upper half plane, we have 
 \begin{equation}
-    G^{T}(\omega)=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\qty[\frac{A^{>}(\omega')}{\omega-\omega'}+\frac{A^{<}(\omega')}{\omega-\omega'}]=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\frac{A(\omega')}{\omega-\omega'}=G^R(\omega)
+    G^{T}(\omega)=\int_{-\infty}^{+\infty}\dd{\omega'}\frac{A(\omega)}{\omega-\omega'+\ii0^{+}}=G^R(\omega)
 \end{equation}
 in the last step we used the fact the imaginary part of $\omega$ is positive.
 Using the same argument, when $\omega$ is on the lower half plane, we have $G^{T}(\omega)=G^{A}(\omega)$.
@@ -85,8 +85,9 @@ For the anti-time-ordered Green's function, we have
 \end{equation}
 and its Fourier transform can be written in terms of the spectral function as
 \begin{equation}
-    G^{\tilde{T}}(\omega)=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi}\qty[\frac{A^{>}(\omega')}{\omega-\omega'+\ii0^{+}}+\frac{A^{<}(\omega')}{\omega-\omega'-\ii0^{+}}].
+    G^{\tilde{T}}(\omega)=\int_{-\infty}^{+\infty}\frac{\dd{\omega'}}{2\pi\ii}\qty[-\frac{G^<(\omega')}{\omega-\omega'+\ii0^{+}}+\frac{G^>(\omega')}{\omega-\omega'-\ii0^{+}}]=-\int_{-\infty}^{+\infty}\dd{\omega'}\frac{A(\omega')}{\omega-\omega'+\sgn(\Im(\omega))\ii 0^+}.
 \end{equation}
+so when $\omega$ is on the upper half plane, we have $G^{\tilde{T}}(\omega)=-G^R(\omega)$, and when $\omega$ is on the lower half plane, we have $G^{\tilde{T}}(\omega)=-G^A(\omega)$.
 
 
 \section*{Problem 2}
@@ -311,6 +312,77 @@ To verify that $A_d(\omega)$ reduces to a Dirac delta function, we can compute t
 \begin{equation}
     \int_{-\infty}^{+\infty} A_d(\omega)\dd{\omega}=\int_{-\infty}^{+\infty}\frac{1}{\pi}\frac{\Gamma}{(\omega-\epsilon_d)^2+\Gamma^2}\dd{\omega}=\frac{1}{\pi}\qty[\arctan\frac{\omega-\epsilon_d}{\Gamma}]_{-\infty}^{+\infty}=1. 
 \end{equation}
+
+\section*{Problem 4}
+\begin{equation}
+    \begin{split}
+        W&=\sum_{\alpha,\beta}\expval{T_\tau c_\alpha^\dagger(\tau_1) c_\beta^\dagger(\tau_1)c_\alpha(\tau_2)c_\beta(\tau_2)}\\
+         &=\expval{T_\tau c_1^\dagger(\tau_1) c_2^\dagger(\tau_1)c_1(\tau_2)c_2(\tau_2)}+\expval{T_\tau c_2^\dagger(\tau_1) c_1^\dagger(\tau_1)c_2(\tau_2)c_1(\tau_2)}\\
+         &=2\expval{T_\tau c_1^\dagger(\tau_1) c_2^\dagger(\tau_1)c_1(\tau_2)c_2(\tau_2)}
+    \end{split}
+\end{equation}
+
+From the Hamiltonian $H=\sum_{\alpha=1}^2\epsilon_\alpha c_\alpha^\dagger c_\alpha+U n_1 n_2=\sum_{\alpha=1}^2 \epsilon_\alpha n_\alpha+U n_1 n_2$, we have the energy eigenstates and eigenvalues:
+\begin{itemize}
+    \item $\ket{0,0}$, $E_0=0$
+    \item $\ket{1,0}=c_1^\dagger\ket{0,0}$, $E_{1,0}=\epsilon_1$
+    \item $\ket{0,1}=c_2^\dagger\ket{0,0}$, $E_{0,1}=\epsilon_2$
+    \item $\ket{1,1}=c_1^\dagger c_2^\dagger\ket{0,0}$, $E_{1,1}=\epsilon_1+\epsilon_2+U$
+\end{itemize}
+\subsection*{Exact Evaluation}
+\begin{equation}
+    \begin{split}
+        &\expval{T_\tau c_1^\dagger(\tau_1) c_2^\dagger(\tau_1)c_1(\tau_2)c_2(\tau_2)}\\
+        &=\theta(\tau_1-\tau_2)\expval{c_1^\dagger(\tau_1) c_2^\dagger(\tau_1)c_1(\tau_2)c_2(\tau_2)}-\theta(\tau_2-\tau_1)\expval{c_1(\tau_2)c_2(\tau_2)c_1^\dagger(\tau_1) c_2^\dagger(\tau_1)}                                                
+    \end{split}
+\end{equation}
+
+So we can compute 
+\begin{equation}
+    \begin{split}
+        \expval{c_1^\dagger(\tau_1) c_2^\dagger(\tau_1)c_1(\tau_2)c_2(\tau_2)}&=\frac{1}{Z}\Tr\qty[e^{-\beta H}c_1^\dagger(\tau_1) c_2^\dagger(\tau_1)c_1(\tau_2)c_2(\tau_2)]\\
+                                                                              &=\frac{1}{Z}\Tr\qty[e^{-\beta H}e^{\tau_1 H}c_1^\dagger c_2^\dagger e^{-\tau_1 H}e^{\tau_2 H}c_1 c_2 e^{-\tau_2 H}]\\
+                                                                              &=\frac{1}{Z}\Tr\qty[e^{-(\beta-\tau_1+\tau_2) H}c_1^\dagger c_2^\dagger e^{-(\tau_1-\tau_2) H}c_1 c_2]\\
+                                                                              &=\frac{1}{Z}\bra{1,1}e^{-(\beta-\tau_1+\tau_2) H}c_1^\dagger c_2^\dagger e^{-(\tau_1-\tau_2) H}c_1 c_2\ket{1,1}\\
+                                                                              &=\frac{1}{Z}e^{-(\beta-\tau_1+\tau_2) E_{1,1}}e^{-(\tau_1-\tau_2) E_{0,0}}\\
+    \end{split}
+\end{equation}
+\begin{equation}
+    \expval{c_1(\tau_2)c_2(\tau_2)c_1^\dagger(\tau_1) c_2^\dagger(\tau_1)}=\frac{1}{Z}e^{-(\beta-\tau_2+\tau_1) E_{0,0}}e^{-(\tau_2-\tau_1) E_{1,1}}
+\end{equation}
+
+Therefore, we have 
+\begin{equation}
+    \begin{split}
+        W&=\frac{2}{Z}\qty[\theta(\tau_1-\tau_2)e^{-(\beta-\tau_1+\tau_2) E_{1,1}}e^{-(\tau_1-\tau_2) E_{0,0}}-\theta(\tau_2-\tau_1)e^{-(\beta-\tau_2+\tau_1) E_{0,0}}e^{-(\tau_2-\tau_1) E_{1,1}}]\\
+            &=\frac{2}{Z}\qty[\theta(\tau_1-\tau_2)e^{-(\beta-\tau_1+\tau_2) (\epsilon_1+\epsilon_2+U)}-\theta(\tau_2-\tau_1)e^{-(\tau_2-\tau_1) (\epsilon_1+\epsilon_2+U)}]
+    \end{split}
+\end{equation}
+
+\subsection*{Wick's Theorem}
+Using Wick's theorem, we have
+\begin{equation}
+    \expval{T_\tau c_1^\dagger(\tau_1) c_2^\dagger(\tau_1)c_1(\tau_2)c_2(\tau_2)}=-\expval{T_\tau c_1^\dagger(\tau_1)c_1(\tau_2)}\expval{T_\tau c_2^\dagger(\tau_1)c_2(\tau_2)}
+\end{equation}
+and 
+\begin{equation}
+    \expval{T_\tau c_1^\dagger(\tau_1)c_1(\tau_2)}=\theta(\tau_1-\tau_2)\expval{c_1^\dagger(\tau_1)c_1(\tau_2)}-\theta(\tau_2-\tau_1)\expval{c_1(\tau_2)c_1^\dagger(\tau_1)}
+\end{equation}
+and 
+\begin{equation}
+    \expval{c_1^\dagger(\tau_1)c_1(\tau_2)}=\frac{1}{Z}\Tr\qty[e^{-\beta H}c_1^\dagger(\tau_1)c_1(\tau_2)]=\frac{1}{Z}e^{-(\beta-\tau_1+\tau_2)\epsilon_1}
+\end{equation}
+and 
+\begin{equation}
+    \expval{c_1(\tau_2)c_1^\dagger(\tau_1)}=\frac{1}{Z}\Tr\qty[e^{-\beta H}c_1(\tau_2)c_1^\dagger(\tau_1)]=\frac{1}{Z}e^{-(\tau_2-\tau_1)\epsilon_1}
+\end{equation}
+Therefore, we have 
+\begin{equation}
+    W=\frac{2}{Z^2}\qty[\theta(\tau_1-\tau_2)e^{-(\beta-\tau_1+\tau_2) (\epsilon_1+\epsilon_2)}-\theta(\tau_2-\tau_1)e^{-(\tau_2-\tau_1) (\epsilon_1+\epsilon_2)}]
+\end{equation}
+
+It is clear that the result from Wick's theorem is different from the exact evaluation.
+
 
 %\bibliographystyle{jhep}
 %\bibliography{ref}
