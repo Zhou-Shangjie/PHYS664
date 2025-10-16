@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{jheppub,physics,amsfonts,graphicx,tensor,cleveref}
+\usepackage[export]{adjustbox}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand{\cd}{\mathcal{D}}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\sgn}{sgn}
+\counterwithout{equation}{section}
+
+
+\title{Homework 3}
+\author{Shangjie Zhou}
+\emailAdd{zhou1468@purdue.edu}
+\toccontinuoustrue
+\notoc
+
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Problem 1}
+\subsection*{(a)}
+For the case of Bosons, we know that the poles of $u_+(z)=\tfrac{1}{2}\coth(\beta z/2)$ are at $z=\ii 2\pi n/\beta$ for $n\in \mathbb{Z}$. Using $\operatorname*{Res}_{w=\ii\pi n}\coth w=1$ and the change of variables $w=\beta z/2$, we have $\operatorname*{Res}_{z=\ii 2\pi n/\beta}\coth(\beta z/2)=2/\beta$, hence
+\begin{equation}
+\operatorname*{Res}\big(u_+(z), z=\ii 2\pi n/\beta\big) = \frac{1}{2}\cdot\frac{2}{\beta} = \frac{1}{\beta}.
+\end{equation}
+Therefore,
+\begin{equation}
+    S=\frac{1}{2\pi\ii}\oint_\mathcal{C}\dd{z}\; f(z)\,u_+(z)=\sum_{n=-\infty}^{\infty} f\!\left(\frac{\ii 2\pi n}{\beta}\right)\cdot \frac{1}{\beta} = \frac{1}{\beta}\sum_{n=-\infty}^{\infty} f\!\left(\frac{\ii 2\pi n}{\beta}\right)=\frac{1}{\beta}\sum_n f(\ii\omega_n).
+\end{equation}
+The case of Fermions can be shown similarly.
+
+\subsection*{(b)}
+After deforming the contour to $\mathcal{C}'$ as shown in the figure, we have
+\begin{equation}
+    S=-\sum_{z_j\in\text{poles of }f}\operatorname*{Res}\big(f(z)u_+(z), z=z_j\big) 
+\end{equation}
+
+
+\subsection*{(c)}
+When we choose 
+\begin{equation}
+    f(z)=\frac{1}{(z-\epsilon_1)(z-\epsilon_2)}
+\end{equation}
+we have two poles at $z=\epsilon_1$ and $z=\epsilon_2$. Therefore,
+\begin{equation}
+    \begin{split}
+        S&=-\operatorname*{Res}\big(f(z)u_+(z), z=\epsilon_1\big)-\operatorname*{Res}\big(f(z)u_+(z), z=\epsilon_2\big)\\
+         &=-\frac{u_{+}(\epsilon_1)}{\epsilon_1-\epsilon_2}-\frac{u_{+}(\epsilon_2)}{\epsilon_2-\epsilon_1}\\
+         &=\frac{-u_{+}(\epsilon_1)+u_{+}(\epsilon_2)}{\epsilon_1-\epsilon_2}
+    \end{split}
+\end{equation}
+Since the particle number distribution function for Bosons is $n_B(\epsilon) = \frac{1}{\me^{\beta\epsilon}-1} = u_+(\epsilon)-\frac{1}{2}$, we have
+\begin{equation}
+    S=-\frac{n_B(\epsilon_1)-n_B(\epsilon_2)}{\epsilon_1-\epsilon_2}.
+\end{equation}
+
+
+%\bibliographystyle{jhep}
+%\bibliography{ref}
+\end{document}
