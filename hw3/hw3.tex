@@ -25,7 +25,7 @@
 \subsection*{(a)}
 For the case of Bosons, we know that the poles of $u_+(z)=\tfrac{1}{2}\coth(\beta z/2)$ are at $z=\ii 2\pi n/\beta$ for $n\in \mathbb{Z}$. Using $\operatorname*{Res}_{w=\ii\pi n}\coth w=1$ and the change of variables $w=\beta z/2$, we have $\operatorname*{Res}_{z=\ii 2\pi n/\beta}\coth(\beta z/2)=2/\beta$, hence
 \begin{equation}
-\operatorname*{Res}\big(u_+(z), z=\ii 2\pi n/\beta\big) = \frac{1}{2}\cdot\frac{2}{\beta} = \frac{1}{\beta}.
+    \operatorname*{Res}\big(u_+(z), z=\ii 2\pi n/\beta\big) = \frac{1}{2}\cdot\frac{2}{\beta} = \frac{1}{\beta}.
 \end{equation}
 Therefore,
 \begin{equation}
@@ -36,26 +36,116 @@ The case of Fermions can be shown similarly.
 \subsection*{(b)}
 After deforming the contour to $\mathcal{C}'$ as shown in the figure, we have
 \begin{equation}
-    S=-\sum_{z_j\in\text{poles of }f}\operatorname*{Res}\big(f(z)u_+(z), z=z_j\big) 
+    S=-\sum_{z_j\in\text{poles of }f}\operatorname*{Res}\big(f(z)u_+(z), z=z_j\big)
 \end{equation}
 
 
 \subsection*{(c)}
-When we choose 
+When we choose
 \begin{equation}
     f(z)=\frac{1}{(z-\epsilon_1)(z-\epsilon_2)}
 \end{equation}
 we have two poles at $z=\epsilon_1$ and $z=\epsilon_2$. Therefore,
 \begin{equation}
     \begin{split}
-        S&=-\operatorname*{Res}\big(f(z)u_+(z), z=\epsilon_1\big)-\operatorname*{Res}\big(f(z)u_+(z), z=\epsilon_2\big)\\
-         &=-\frac{u_{+}(\epsilon_1)}{\epsilon_1-\epsilon_2}-\frac{u_{+}(\epsilon_2)}{\epsilon_2-\epsilon_1}\\
-         &=\frac{-u_{+}(\epsilon_1)+u_{+}(\epsilon_2)}{\epsilon_1-\epsilon_2}
+        S & =-\operatorname*{Res}\big(f(z)u_+(z), z=\epsilon_1\big)-\operatorname*{Res}\big(f(z)u_+(z), z=\epsilon_2\big) \\
+          & =-\frac{u_{+}(\epsilon_1)}{\epsilon_1-\epsilon_2}-\frac{u_{+}(\epsilon_2)}{\epsilon_2-\epsilon_1}             \\
+          & =\frac{-u_{+}(\epsilon_1)+u_{+}(\epsilon_2)}{\epsilon_1-\epsilon_2}
     \end{split}
 \end{equation}
 Since the particle number distribution function for Bosons is $n_B(\epsilon) = \frac{1}{\me^{\beta\epsilon}-1} = u_+(\epsilon)-\frac{1}{2}$, we have
 \begin{equation}
     S=-\frac{n_B(\epsilon_1)-n_B(\epsilon_2)}{\epsilon_1-\epsilon_2}.
+\end{equation}
+
+
+\section*{Problem 2}
+\subsection*{(a)}
+The Euclidean action for the harmonic oscillator is
+\begin{equation}
+    S_E[x] = \int_0^{\beta} \dd{\tau} \left[ \frac{m}{2} \left( \frac{\dd{x}}{\dd{\tau}} \right)^2 + \frac{m\omega^2}{2} x^2 \right].
+\end{equation}
+and the overlap $\bra{x(\beta)=x_f}\ket{x(0)=x_i}$ is given by
+\begin{equation}
+    \bra{x(\beta)=x_f}\ket{x(0)=x_i}=\bra{x_f}\me^{-\beta H}\ket{x_i} = \int_{x(0)=x_i}^{x(\beta)=x_f} \mathcal{D}x \; e^{-S_E[x]}.
+\end{equation}
+The partition function is given by
+\begin{equation}
+    Z = \int \dd{x} \; \bra{x}\me^{-\beta H}\ket{x} = \int \dd{x} \; \int_{x(0)=x}^{x(\beta)=x} \mathcal{D}x \; e^{-S_E[x]}.
+\end{equation}
+
+\subsection*{(b)}
+Consider the following Euclidean action with an external source $j(\tau)$:
+\begin{equation}
+    S_E[x,j] = \int_0^{\beta} \dd{\tau} \left[ \frac{m}{2} \left( \frac{\dd{x}}{\dd{\tau}} \right)^2 + \frac{m\omega^2}{2} x^2 + jx \right].
+\end{equation}
+The correlation function can be written as
+\begin{equation}
+    G(\tau)=\expval{T_\tau x(\tau)x(0)}=-\frac{1}{Z}\int \mathcal{D}x \; x(\tau)x(0) \; e^{-S_E[x]}=\frac{1}{Z}\frac{\delta^2 Z[j]}{\delta j(\tau)\delta j(0)}\Bigg|_{j=0},
+\end{equation}
+where
+\begin{equation}
+    Z[j] =\int\dd{x} \int_{x(0)=x}^{x(\beta)=x} \mathcal{D}x \; e^{-S_E[x,j]}.
+\end{equation}
+
+\subsection*{(c)}
+To compute the generating functional $Z[j]$, we can use the following Gaussian functional integral formula:
+\begin{equation}
+    \int \mathcal{D}\phi \; \exp\left[-\frac{1}{2}\int \dd{x} \dd{y} \; \phi(x)A(x,y)\phi(y) + \int \dd{x} \; J(x)\phi(x)\right] \sim (\det A)^{-\frac{1}{2}} \exp\left[\frac{1}{2}\int \dd{x} \dd{y} \; J(x)A^{-1}(x,y)J(y)\right].
+\end{equation}
+After integrating by parts, the Euclidean action can be rewritten as
+\begin{equation}
+    S_E[x,j] = \int_0^{\beta} \dd{\tau} \left[ -\frac{m}{2} x \left( \frac{\dd^2}{\dd{\tau}^2} - \omega^2 \right) x + jx \right]
+\end{equation}
+Therefore, we identify $A(\tau,\tau') = m\left( \frac{\dd^2}{\dd{\tau}^2} - \omega^2 \right)\delta(\tau-\tau')$ and $J(\tau) = j(\tau)$.
+The generating functional is then given by
+\begin{equation}
+    Z[j] \sim (\det A)^{-\frac{1}{2}} \exp\left[\frac{1}{2}\int_0^{\beta} \dd{\tau} \dd{\tau'} \; j(\tau) A^{-1}(\tau,\tau') j(\tau')\right],
+\end{equation}
+and the partition function is
+\begin{equation}
+    Z = Z[0] \sim (\det A)^{-\frac{1}{2}}.
+\end{equation}
+The normalization factor $(\det A)^{-\frac{1}{2}}$ can be canceled when evaluating the correlation function, so we can focus on the exponent part.
+The inverse operator $A^{-1}(\tau,\tau')$ satisfies
+\begin{equation}
+    m\left( \frac{\dd^2}{\dd{\tau}^2} - \omega^2 \right) A^{-1}(\tau,\tau') = \delta(\tau-\tau')\label{eq:Ainverse}
+\end{equation}
+and we can solve for $A^{-1}(\tau,\tau')$ by expanding it in Fourier series:
+\begin{equation}
+    A^{-1}(\tau,\tau') = \frac{1}{\beta} \sum_{n=-\infty}^{\infty} \tilde{A}^{-1}(\omega_n) \me^{-\ii \omega_n (\tau-\tau')}.\label{eq:Ainverse_fourier}
+\end{equation}
+where $\omega_n = 2\pi n/\beta$ are the Bosonic Matsubara frequencies.
+After plugging \cref{eq:Ainverse_fourier} into \cref{eq:Ainverse}, we have
+\begin{equation}
+    m(-\omega_n^2 - \omega^2) \tilde{A}^{-1}(\omega_n) = 1 \implies \tilde{A}^{-1}(\omega_n) = -\frac{1}{m(\omega_n^2 + \omega^2)},
+\end{equation}
+so
+\begin{equation}
+    A^{-1}(\tau,\tau') = -\frac{1}{\beta m} \sum_{n=-\infty}^{\infty} \frac{\me^{-\ii \omega_n (\tau-\tau')}}{\omega_n^2 + \omega^2}.
+\end{equation}
+Now we are ready to compute the correlation function:
+\begin{equation}
+    \begin{split}
+        G(\tau) & =\frac{1}{Z}\frac{\delta^2 Z[j]}{\delta j(\tau)\delta j(0)}\Bigg|_{j=0} = \frac{\delta^2}{\delta j(\tau)\delta j(0)} \exp\left[\frac{1}{2}\int_0^{\beta} \dd{\tau_1} \dd{\tau_2} \; j(\tau_1) A^{-1}(\tau_1,\tau_2) j(\tau_2)\right]\Bigg|_{j=0} \\
+                & =A^{-1}(\tau,0) = -\frac{1}{\beta m} \sum_{n=-\infty}^{\infty} \frac{\me^{-\ii \omega_n \tau}}{\omega_n^2 + \omega^2}.
+    \end{split}
+\end{equation}
+Using the Matsubara sum formula derived in Problem 1, we choose 
+\begin{equation}
+    f(z) = \frac{\me^{-\tau z}}{z^2 - \omega^2}
+\end{equation}
+and find that
+\begin{equation}
+    \begin{split}
+        G(\tau) &= \frac{1}{m}\sum_{z_i\in\text{poles of }f} \operatorname*{Res}\big(f(z)u_+(z), z=z_i\big)\\
+                &= \frac{1}{m}(\operatorname*{Res}\big(f(z)u_+(z), z=\omega\big) + \operatorname*{Res}\big(f(z)u_+(z), z=-\omega\big))\\
+                &= \frac{1}{m}\left(\frac{\me^{-\tau \omega}}{2\omega}u_+(\omega) - \frac{\me^{\tau \omega}}{2\omega}u_+(-\omega)\right)\\
+    \end{split}
+\end{equation}
+Using that $u_+(z)=\coth(\beta z/2)/2$, we have 
+\begin{equation}
+    G(\tau) = \frac{\me^{-\tau\omega}\coth(\beta\omega/2)-\me^{\tau\omega}\coth(-\beta\omega/2)}{4m\omega}=\frac{(\me^{-\tau\omega}+\me^{\tau\omega})\coth(\beta\omega/2)}{4m\omega}.
 \end{equation}
 
 
