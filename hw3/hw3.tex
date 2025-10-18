@@ -149,6 +149,61 @@ Using that $u_+(z)=\coth(\beta z/2)/2$, we have
 \end{equation}
 
 
+\section*{Problem 3}
+\subsection*{(a)}
+Since $A$ is a real symmetric matrix, it can be diagonalized by an orthogonal matrix $O$ such that $A=O^T \Lambda O$, where $\Lambda$ is a diagonal matrix with eigenvalues $\lambda_i$ on the diagonal. 
+The Gaussian integral can be computed as follows:
+\begin{equation}
+    \begin{split}
+        Z(J) & = \int \dd^n x \; \exp\left(-\frac{1}{2} x^T A x+J^T x\right)\\
+             & = \int \dd[n]{x} \exp(-\frac{1}{2}x^T O^T \Lambda Ox+J^T x)\\
+             & = \int \dd[n]{x} \exp(-\frac{1}{2}x^T O^T \Lambda Ox+J^T O^T O x)\\
+             & = \int \dd[n]{y} \exp(-\frac{1}{2}y^T \Lambda y +(OJ)^T y)\\
+             & = \prod_{i=1}^n \int \dd{y_i} \exp\left(-\frac{1}{2}\lambda_i y_i^2 + (OJ)_i y_i\right)\\
+             & = \prod_{i=1}^n \int \dd{y_i} \exp(-\frac{1}{2}\lambda_i y_i^2 +(OJ)_i y_i -\frac{(OJ)_i^2}{2\lambda_i} + \frac{(OJ)_i^2}{2\lambda_i})\\
+             & = \prod_{i=1}^n \int \dd{y_i} \exp[-\frac{1}{2}\lambda_i \left(y_i - \frac{(OJ)_i}{\lambda_i}\right)^2 + \frac{(OJ)_i^2}{2\lambda_i}]\\
+             & = \prod_{i=1}^n \sqrt{\frac{2\pi}{\lambda_i}} \exp[\frac{(OJ)_i^2}{2\lambda_i}]\\
+             & = \sqrt{\frac{(2\pi)^n}{\det A}} \exp(\frac{1}{2} J^T A^{-1} J).
+    \end{split}
+\end{equation}
+\subsection*{(b)}
+We can verify that 
+\begin{equation}
+    \pdv{J_i}\ln{Z(J)}=\frac{1}{Z(J)}\pdv{Z(J)}{J_i}=\frac{1}{Z(J)}\int \dd^n x \; x_i \exp\left(-\frac{1}{2} x^T A x+J^T x\right)=\expval{x_i}_J
+\end{equation}
+and by using the result from part (a),
+\begin{equation}
+    \expval{x_i}_J = \pdv{J_i}\ln{Z(J)} = \pdv{J_i} \left( \frac{1}{2} J^T A^{-1} J \right) = \sum_{j=1}^n A^{-1}_{ij} J_j=(A^{-1}J)_i.
+\end{equation}
+
+For the two-point correlation function, we have
+\begin{equation}
+    \begin{split}
+        \expval{x_i x_j}_J &= \frac{1}{Z(J)} \int \dd^n x \; x_i x_j \exp\left(-\frac{1}{2} x^T A x + J^T x\right)\\
+                           &=\frac{1}{Z(J)}\frac{\partial^2}{\partial J_i \partial J_j} Z(J)\\
+                           &= \frac{\partial^2}{\partial J_i \partial J_j} \left( \frac{1}{2} J^T A^{-1} J \right) + \left( \frac{\partial}{\partial J_i} \left( \frac{1}{2} J^T A^{-1} J \right) \right) \left( \frac{\partial}{\partial J_j} \left( \frac{1}{2} J^T A^{-1} J \right) \right)\\
+                           &=( A^{-1})_{ij} + (A^{-1}J)_i (A^{-1}J)_j.
+    \end{split}
+\end{equation}
+
+\subsection*{(c)}
+For the 4-point correlation function, we have
+\begin{equation}
+    \begin{split}
+        \expval{x_i x_j x_k x_l}_J &= \frac{1}{Z(J)} \int \dd^n x \; x_i x_j x_k x_l \exp\left(-\frac{1}{2} x^T A x + J^T x\right)\\ 
+                                   &= \frac{1}{Z(J)} \frac{\partial^4}{\partial J_i \partial J_j \partial J_k \partial J_l} Z(J)\\
+                                   &= \frac{\partial}{\partial J_i} \left( \frac{1}{2} J^T A^{-1} J  \right)  \frac{\partial}{\partial J_j} \left( \frac{1}{2} J^T A^{-1} J  \right) \frac{\partial}{\partial J_k} \left( \frac{1}{2} J^T A^{-1} J \right)  \frac{\partial}{\partial J_l} \left( \frac{1}{2} J^T A^{-1} J \right)\\
+                                   &\quad+\frac{\partial}{\partial J_i} \left( \frac{1}{2} J^T A^{-1} J  \right)\frac{\partial}{\partial J_j} \left( \frac{1}{2} J^T A^{-1} J  \right)\frac{\partial^2}{\partial J_k \partial J_l} \left( \frac{1}{2} J^T A^{-1} J \right)+\dots\\
+                                   &\quad + \frac{\partial^2}{\partial J_i \partial J_j} \left( \frac{1}{2} J^T A^{-1} J \right) \frac{\partial^2}{\partial J_k \partial J_l} \left( \frac{1}{2} J^T A^{-1} J \right)+\dots\\
+                                   &=\mu_i \mu_j \mu_k \mu_l\\
+                                   &\quad+\mu_i\mu_j C_{kl}+\mu_i\mu_k C_{jl}+\dots\\
+                                   &\quad + C_{ij} C_{kl} + C_{ik} C_{jl} + C_{il} C_{jk}
+    \end{split}
+\end{equation}
+where we used the fact that all the derivative of order higher than 2 vanish.
+
+
+
 %\bibliographystyle{jhep}
 %\bibliography{ref}
 \end{document}
