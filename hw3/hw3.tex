@@ -201,6 +201,53 @@ For the 4-point correlation function, we have
     \end{split}
 \end{equation}
 where we used the fact that all the derivative of order higher than 2 vanish.
+When $J=0$, we have $\mu_i=0$ and thus
+\begin{equation}
+    \expval{x_i x_j x_k x_l}_{J=0} = C_{ij} C_{kl} + C_{ik} C_{jl} + C_{il} C_{jk}.
+\end{equation}
+For general even $n$, we can consider the following derivative of $Z(J)$:
+\begin{equation}
+    \expval{x_{i_1} x_{i_2} \dots x_{i_n}}_J = \frac{1}{Z(J)}\frac{\partial^n}{\partial J_{i_1} \partial J_{i_2} \dots \partial J_{i_n}} Z(J).
+\end{equation}
+and similarly apply Leibniz rule to obtain the sum over all ways of partitioning the indices into paired covariances $C_{ij}$ and singletons replaced by means $\mu_i$.
+When $J=0$, we have the usual Wick's theorem:
+\begin{equation}
+    \expval{x_{i_1} x_{i_2} \dots x_{i_n}}_{J=0} = \sum_{\text{all pairings}} \prod_{\text{pairs }(a,b)} C_{ab}.
+\end{equation}
+
+\subsection*{(d)}
+
+\subsection*{(e)}
+
+\section*{Problem 4}
+After expanding $\exp(-\Psi^T A\Psi)$, the only term that contribute to the integral is $\frac{1}{N!}(-\Psi^T A \Psi)^N$.
+Therefore, we have 
+\begin{equation}
+    \begin{split}
+        \int\mathcal{D}\Psi \; \exp(-\Psi^T A \Psi)&=\int\mathcal{D}\Psi \; \frac{1}{N!}(-\Psi^T A \Psi)^N\\
+                                                   &=\int\mathcal{D}\Psi \; \frac{1}{N!}\left(-\sum_{ij}\Psi_i A_{ij} \Psi_j\right)^N
+    \end{split}
+\end{equation}
+Since the Grassmann numbers cannot appear more than once in the integrand, we need to pick out the term that contains all $\Psi_1, \Psi_2, \dots, \Psi_{2N}$ exactly once. This can be done by choosing $N$ pairs of indices $(i_k,j_k)$ such that $\{i_1,j_1,i_2,j_2,\dots,i_N,j_N\}=\{1,2,\dots,2N\}$. 
+Therefore, we have
+\begin{equation}
+    \left(\sum_{ij}\Psi_i A_{ij} \Psi_j\right)^N =N! \sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^{2N} \Psi_i \prod_{i=1}^N A_{P(2i-1),P(2i)}
+\end{equation}
+where the $\text{sgn}(P)$ comes from the permutation of the Grassmann numbers.
+Thus, we have
+\begin{equation}
+    \begin{split}
+        \int\mathcal{D}\Psi \; \exp(-\Psi^T A \Psi)&=\int\mathcal{D}\Psi \; \frac{1}{N!}(-1)^N N! \sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^{2N} \Psi_i \prod_{i=1}^N A_{P(2i-1),P(2i)}\\
+                                                   &=\sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^N A_{P(2i-1),P(2i)}\\
+                                                   &=\operatorname{Pf}(A)
+    \end{split}
+\end{equation}
+where we used the integral of Grassmann numbers 
+\begin{equation}
+    \int\dd{\Psi_1}\dd{\Psi_2}\dots\dd{\Psi_{2N}} \; \prod_{i=1}^{2N} \Psi_i = (-1)^N
+\end{equation}
+and the $(-1)^N$ comes from reordering the Grassmann numbers to $\Psi_{2N}\Psi_{2N-1}\dots\Psi_1$.
+
 
 
 
