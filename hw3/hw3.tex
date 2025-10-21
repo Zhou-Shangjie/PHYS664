@@ -1,6 +1,9 @@
 \documentclass{article}
 \usepackage{jheppub,physics,amsfonts,graphicx,tensor,cleveref}
 \usepackage[export]{adjustbox}
+% TikZ for contour figures
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathreplacing,positioning,decorations.markings}
 \newcommand{\ii}{\mathrm{i}}
 \newcommand{\me}{\mathrm{e}}
 \newcommand{\cd}{\mathcal{D}}
@@ -38,6 +41,57 @@ After deforming the contour to $\mathcal{C}'$ as shown in the figure, we have
 \begin{equation}
     S=-\sum_{z_j\in\text{poles of }f}\operatorname*{Res}\big(f(z)u_+(z), z=z_j\big)
 \end{equation}
+% Matsubara contour figure inserted for Problem 1(b)
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+    % axes
+    \draw[->] (-5.2,0) -- (5.2,0) node[right] {Re\,z};
+    \draw[->] (0,-4.5) -- (0,4.5) node[above] {Im\,z};
+
+    % imaginary axis Matsubara points (fermionic/bosonic positions - label generically i\omega_n)
+    \foreach \n/\y in {-3/-3.5,-2/-2.5,-1/-1.5,1/1.5,2/2.5,3/3.5}
+    {
+        \fill[blue] (0,\y) circle(1.8pt);
+    }
+    \node[left] at (0,1.5) {$i\omega_{1}$};
+    \node[left] at (0,2.5) {$i\omega_{2}$};
+    % vertical ellipsis between omega_2 and omega_n
+    \node[left] at (0,3.0) {$\vdots$};
+    \node[left] at (0,3.5) {$i\omega_{n}$};
+    \node[left] at (0,-1.5) {$i\omega_{-1}$};
+    \node[left] at (0,-2.5) {$i\omega_{-2}$};
+    % vertical ellipsis on negative side
+    \node[left] at (0,-3.0) {$\vdots$};
+    \node[left] at (0,-3.5) {$i\omega_{-n}$};
+
+    % example real-axis poles
+    \draw[fill=red] (1.6,0) circle(2pt) node[below right] {\small $\epsilon_1$};
+    \draw[fill=red] (-2.2,0) circle(2pt) node[below left] {\small $\epsilon_2$};
+
+    % contour C' (deformed) - rectangular with small detours around real poles
+    % draw each side as a separate segment and place a single arrow at the midpoint
+    \draw[thick,postaction={decorate},decoration={markings,mark=at position 0.5 with {\arrow{Latex}}}] (-1,4) -- (1,4);
+    \draw[thick,postaction={decorate},decoration={markings,mark=at position 0.5 with {\arrow{Latex}}}] (1,4) -- (1,-4);
+    \draw[thick,postaction={decorate},decoration={markings,mark=at position 0.5 with {\arrow{Latex}}}] (1,-4) -- (-1,-4);
+    \draw[thick,postaction={decorate},decoration={markings,mark=at position 0.5 with {\arrow{Latex}}}] (-1,-4) -- (-1,4);
+
+    % semicircles whose diameters are the vertical sides (centered at x=1 and x=-1, radius=4)
+    % right semicircle (to the right of the rectangle)
+    \draw[dashed,postaction={decorate},decoration={markings,
+        mark=at position 0.33 with {\arrow{Latex}},
+        mark=at position 0.66 with {\arrow{Latex}}}]
+        (1,-4) arc[start angle=-90,end angle=90,radius=4];
+    % left semicircle was here; reflected across vertical axis to the right side
+    % mirrored semicircle (to the right, bottom->top) so together with the other arc they form a full circle at x=1
+    \draw[dashed,postaction={decorate},decoration={markings,
+        mark=at position 0.33 with {\arrow{Latex}},
+        mark=at position 0.66 with {\arrow{Latex}}}]
+        (-1,4) arc[start angle=90,end angle=270,radius=4];
+
+
+
+\end{tikzpicture}
+\end{center}
 
 
 \subsection*{(c)}
@@ -77,11 +131,11 @@ The partition function is given by
 \subsection*{(b)}
 Consider the following Euclidean action with an external source $j(\tau)$:
 \begin{equation}
-    S_E[x,j] = \int_0^{\beta} \dd{\tau} \left[ \frac{m}{2} \left( \frac{\dd{x}}{\dd{\tau}} \right)^2 + \frac{m\omega^2}{2} x^2 + jx \right].
+    S_E[x,j] = \int_0^{\beta} \dd{\tau} \left[ \frac{m}{2} \left( \frac{\dd{x}}{\dd{\tau}} \right)^2 + \frac{m\omega^2}{2} x^2 - jx \right].
 \end{equation}
 The correlation function can be written as
 \begin{equation}
-    G(\tau)=\expval{T_\tau x(\tau)x(0)}=-\frac{1}{Z}\int \mathcal{D}x \; x(\tau)x(0) \; e^{-S_E[x]}=\frac{1}{Z}\frac{\delta^2 Z[j]}{\delta j(\tau)\delta j(0)}\Bigg|_{j=0},
+    G(\tau)=\expval{T_\tau x(\tau)x(0)}=\frac{1}{Z}\int \mathcal{D}x \; x(\tau)x(0) \; e^{-S_E[x]}=\frac{1}{Z}\frac{\delta^2 Z[j]}{\delta j(\tau)\delta j(0)}\Bigg|_{j=0},
 \end{equation}
 where
 \begin{equation}
@@ -95,9 +149,9 @@ To compute the generating functional $Z[j]$, we can use the following Gaussian f
 \end{equation}
 After integrating by parts, the Euclidean action can be rewritten as
 \begin{equation}
-    S_E[x,j] = \int_0^{\beta} \dd{\tau} \left[ -\frac{m}{2} x \left( \frac{\dd^2}{\dd{\tau}^2} - \omega^2 \right) x + jx \right]
+    S_E[x,j] = \int_0^{\beta} \dd{\tau} \left[ \frac{m}{2} x \left( -\frac{\dd^2}{\dd{\tau}^2} + \omega^2 \right) x - jx \right]
 \end{equation}
-Therefore, we identify $A(\tau,\tau') = m\left( \frac{\dd^2}{\dd{\tau}^2} - \omega^2 \right)\delta(\tau-\tau')$ and $J(\tau) = j(\tau)$.
+Therefore, we identify $A(\tau,\tau') = m\left( -\frac{\dd^2}{\dd{\tau}^2} + \omega^2 \right)\delta(\tau-\tau')$ and $J(\tau) = j(\tau)$.
 The generating functional is then given by
 \begin{equation}
     Z[j] \sim (\det A)^{-\frac{1}{2}} \exp\left[\frac{1}{2}\int_0^{\beta} \dd{\tau} \dd{\tau'} \; j(\tau) A^{-1}(\tau,\tau') j(\tau')\right],
@@ -109,7 +163,7 @@ and the partition function is
 The normalization factor $(\det A)^{-\frac{1}{2}}$ can be canceled when evaluating the correlation function, so we can focus on the exponent part.
 The inverse operator $A^{-1}(\tau,\tau')$ satisfies
 \begin{equation}
-    m\left( \frac{\dd^2}{\dd{\tau}^2} - \omega^2 \right) A^{-1}(\tau,\tau') = \delta(\tau-\tau')\label{eq:Ainverse}
+    m\left( -\frac{\dd^2}{\dd{\tau}^2} + \omega^2 \right) A^{-1}(\tau,\tau') = \delta(\tau-\tau')\label{eq:Ainverse}
 \end{equation}
 and we can solve for $A^{-1}(\tau,\tau')$ by expanding it in Fourier series:
 \begin{equation}
@@ -118,17 +172,17 @@ and we can solve for $A^{-1}(\tau,\tau')$ by expanding it in Fourier series:
 where $\omega_n = 2\pi n/\beta$ are the Bosonic Matsubara frequencies.
 After plugging \cref{eq:Ainverse_fourier} into \cref{eq:Ainverse}, we have
 \begin{equation}
-    m(-\omega_n^2 - \omega^2) \tilde{A}^{-1}(\omega_n) = 1 \implies \tilde{A}^{-1}(\omega_n) = -\frac{1}{m(\omega_n^2 + \omega^2)},
+    m(\omega_n^2 + \omega^2) \tilde{A}^{-1}(\omega_n) = 1 \implies \tilde{A}^{-1}(\omega_n) = \frac{1}{m(\omega_n^2 + \omega^2)},
 \end{equation}
 so
 \begin{equation}
-    A^{-1}(\tau,\tau') = -\frac{1}{\beta m} \sum_{n=-\infty}^{\infty} \frac{\me^{-\ii \omega_n (\tau-\tau')}}{\omega_n^2 + \omega^2}.
+    A^{-1}(\tau,\tau') = \frac{1}{\beta m} \sum_{n=-\infty}^{\infty} \frac{\me^{-\ii \omega_n (\tau-\tau')}}{\omega_n^2 + \omega^2}.
 \end{equation}
 Now we are ready to compute the correlation function:
 \begin{equation}
     \begin{split}
         G(\tau) & =\frac{1}{Z}\frac{\delta^2 Z[j]}{\delta j(\tau)\delta j(0)}\Bigg|_{j=0} = \frac{\delta^2}{\delta j(\tau)\delta j(0)} \exp\left[\frac{1}{2}\int_0^{\beta} \dd{\tau_1} \dd{\tau_2} \; j(\tau_1) A^{-1}(\tau_1,\tau_2) j(\tau_2)\right]\Bigg|_{j=0} \\
-                & =A^{-1}(\tau,0) = -\frac{1}{\beta m} \sum_{n=-\infty}^{\infty} \frac{\me^{-\ii \omega_n \tau}}{\omega_n^2 + \omega^2}.
+                & =A^{-1}(\tau,0) = \frac{1}{\beta m} \sum_{n=-\infty}^{\infty} \frac{\me^{-\ii \omega_n \tau}}{\omega_n^2 + \omega^2}.
     \end{split}
 \end{equation}
 Using the Matsubara sum formula derived in Problem 1, we choose 
