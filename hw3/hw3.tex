@@ -339,14 +339,14 @@ Therefore, we have
 Since the Grassmann numbers cannot appear more than once in the integrand, we need to pick out the term that contains all $\Psi_1, \Psi_2, \dots, \Psi_{2N}$ exactly once. This can be done by choosing $N$ pairs of indices $(i_k,j_k)$ such that $\{i_1,j_1,i_2,j_2,\dots,i_N,j_N\}=\{1,2,\dots,2N\}$. 
 Therefore, we have
 \begin{equation}
-    \left(\sum_{ij}\Psi_i A_{ij} \Psi_j\right)^N =N! \sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^{2N} \Psi_i \prod_{i=1}^N A_{P(2i-1),P(2i)}
+    \left(\sum_{ij}\Psi_i A_{ij} \Psi_j\right)^N = \sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^{2N} \Psi_i \prod_{i=1}^N A_{P(2i-1),P(2i)}
 \end{equation}
 where the $\text{sgn}(P)$ comes from the permutation of the Grassmann numbers.
 Thus, we have
 \begin{equation}
     \begin{split}
-        \int\mathcal{D}\Psi \; \exp(-\Psi^T A \Psi/2)&=\int\mathcal{D}\Psi \; \frac{1}{2^N N!}(-1)^N N! \sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^{2N} \Psi_i \prod_{i=1}^N A_{P(2i-1),P(2i)}\\
-                                                   &=\frac{1}{2^N}\sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^N A_{P(2i-1),P(2i)}\\
+        \int\mathcal{D}\Psi \; \exp(-\Psi^T A \Psi/2)&=\int\mathcal{D}\Psi \; \frac{1}{2^N N!}(-1)^N  \sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^{2N} \Psi_i \prod_{i=1}^N A_{P(2i-1),P(2i)}\\
+                                                   &=\frac{1}{2^N N!}\sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^N A_{P(2i-1),P(2i)}\\
                                                    &=\operatorname{Pf}(A)
     \end{split}
 \end{equation}
