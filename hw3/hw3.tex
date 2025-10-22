@@ -37,7 +37,7 @@ Therefore,
 The case of Fermions can be shown similarly.
 
 \subsection*{(b)}
-After deforming the contour to $\mathcal{C}'$ as shown in the figure, we have
+After deforming the contour to the dashed line as shown in the figure, we have
 \begin{equation}
     S=-\sum_{z_j\in\text{poles of }f}\operatorname*{Res}\big(f(z)u_+(z), z=z_j\big)
 \end{equation}
@@ -199,7 +199,7 @@ and find that
 \end{equation}
 Using that $u_+(z)=\coth(\beta z/2)/2$, we have 
 \begin{equation}
-    G(\tau) = \frac{\me^{-\tau\omega}\coth(\beta\omega/2)-\me^{\tau\omega}\coth(-\beta\omega/2)}{4m\omega}=\frac{(\me^{-\tau\omega}+\me^{\tau\omega})\coth(\beta\omega/2)}{4m\omega}.
+    G(\tau) = \frac{\me^{-\tau\omega}\coth(\beta\omega/2)-\me^{\tau\omega}\coth(-\beta\omega/2)}{4m\omega}=\frac{(\me^{-\tau\omega}+\me^{\tau\omega})\coth(\beta\omega/2)}{4m\omega}=\frac{\sinh(\tau\omega)\coth(\beta\omega/2)}{2m\omega}.
 \end{equation}
 
 
@@ -270,16 +270,70 @@ When $J=0$, we have the usual Wick's theorem:
 \end{equation}
 
 \subsection*{(d)}
+When we consider complex vectors $z$ and $z^*$, the Gaussian integral is 
+\begin{equation}
+    Z[j,j^\dagger]= \int \dd^{2n} z  \; \exp\left(-z^\dagger M z + j^\dagger z + z^\dagger j\right) 
+\end{equation}
+where $M$ is a Hermitian positive-definite matrix.
+By completing the square, we have
+\begin{equation}
+    \begin{split}
+        Z[j,j^\dagger] & = \int \dd^{2n} z \; \exp\left[-(z - M^{-1} j)^\dagger M (z - M^{-1} j) + j^\dagger M^{-1} j\right] \\
+                       & = \int \dd^{2n} z' \; \exp\left(-z'^\dagger M z'\right) \exp\left(j^\dagger M^{-1} j\right) 
+    \end{split}
+\end{equation}
+where we made the substitution $z' = z - M^{-1} j$.
+The matrix $M$ can be diagonalized by a unitary matrix $U$ such that $M = U^\dagger \Lambda U$, where $\Lambda$ is a diagonal matrix with eigenvalues $\lambda_i$ on the diagonal.
+Therefore, we have
+\begin{equation}
+    \begin{split}
+        \int\dd[2n]{z}\exp(-z^\dagger M z) & = \int \dd[2n]{z'} \; \exp(-z'^\dagger U^\dagger \Lambda U z')\\
+                                                   & = \int \dd[2n]{w} \; \exp(-w^\dagger \Lambda w)\\
+                                                   & = \prod_{i=1}^n \int \dd{w_i^*} \dd{w_i} \; \exp(-\lambda_i w_i^* w_i)\\
+                                                   & = \prod_{i=1}^n \frac{\pi}{\lambda_i} = \frac{\pi^n}{\det M}
+    \end{split}
+\end{equation}
+Therefore, we have
+\begin{equation}
+    Z[j,j^\dagger] = \frac{\pi^n}{\det M} \exp\left(j^\dagger M^{-1} j\right).
+\end{equation}
+
 
 \subsection*{(e)}
+After going to continumum limit, we have the following substitutions:
+\begin{equation}
+    \sum_{i=1}^n \to \int \dd{x}, \quad A_{ij} \to A(x,y), \quad J_i \to J(x), \quad x_i \to \phi(x), \quad \dd^n x \to \mathcal{D}\phi.  
+\end{equation}
+which gives
+\begin{equation}
+    \begin{split}
+        Z[J] &= \int \mathcal{D}\phi \; \exp\left(-\frac{1}{2} \int \dd{x} \dd{y} \; \phi(x) A(x,y) \phi(y) + \int \dd{x} \; J(x) \phi(x)\right)\\
+        &\quad\quad\sim (\det A)^{-\frac{1}{2}} \exp\left(\frac{1}{2} \int \dd{x} \dd{y} \; J(x) A^{-1}(x,y) J(y)\right).
+    \end{split}
+\end{equation}
 
 \section*{Problem 4}
-After expanding $\exp(-\Psi^T A\Psi)$, the only term that contribute to the integral is $\frac{1}{N!}(-\Psi^T A \Psi)^N$.
+\subsection*{(a)}
+When we take $A=\mqty(0&a\\-a&0)$, we find that the integral becomes
+\begin{equation}
+    \begin{split}
+        \int\mathcal{D}\Psi \; \exp(-\Psi^T A \Psi/2) &= \int\mathcal{D}\Psi \; \exp\left(-\frac{1}{2} \sum_{ij} \Psi_i A_{ij} \Psi_j\right)\\
+                                                    &= \int\dd{\Psi_1}\dd{\Psi_2} \; \exp(-a \Psi_1 \Psi_2)\\
+                                                    &= \int\dd{\Psi_1}\dd{\Psi_2} \; (1 - a \Psi_1 \Psi_2)\\
+                                                    &= a.
+    \end{split}
+\end{equation}
+We can also compute the Pfaffian of $A$:
+\begin{equation}
+    \operatorname{Pf}(A) = \frac{1}{2^1 1!} \sum_{P\in S_2} \text{sgn}(P) A_{P(1),P(2)} = A_{1,2} = a.
+\end{equation}
+\subsection*{(b)}
+After expanding $\exp(-\Psi^T A\Psi/2)$, the only term that contribute to the integral is $\frac{1}{2^N N!}(-\Psi^T A \Psi)^N$.
 Therefore, we have 
 \begin{equation}
     \begin{split}
-        \int\mathcal{D}\Psi \; \exp(-\Psi^T A \Psi)&=\int\mathcal{D}\Psi \; \frac{1}{N!}(-\Psi^T A \Psi)^N\\
-                                                   &=\int\mathcal{D}\Psi \; \frac{1}{N!}\left(-\sum_{ij}\Psi_i A_{ij} \Psi_j\right)^N
+        \int\mathcal{D}\Psi \; \exp(-\Psi^T A \Psi/2)&=\int\mathcal{D}\Psi \; \frac{1}{2^N N!}(-\Psi^T A \Psi)^N\\
+                                                   &=\int\mathcal{D}\Psi \; \frac{1}{2^N N!}\left(-\sum_{ij}\Psi_i A_{ij} \Psi_j\right)^N
     \end{split}
 \end{equation}
 Since the Grassmann numbers cannot appear more than once in the integrand, we need to pick out the term that contains all $\Psi_1, \Psi_2, \dots, \Psi_{2N}$ exactly once. This can be done by choosing $N$ pairs of indices $(i_k,j_k)$ such that $\{i_1,j_1,i_2,j_2,\dots,i_N,j_N\}=\{1,2,\dots,2N\}$. 
@@ -291,8 +345,8 @@ where the $\text{sgn}(P)$ comes from the permutation of the Grassmann numbers.
 Thus, we have
 \begin{equation}
     \begin{split}
-        \int\mathcal{D}\Psi \; \exp(-\Psi^T A \Psi)&=\int\mathcal{D}\Psi \; \frac{1}{N!}(-1)^N N! \sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^{2N} \Psi_i \prod_{i=1}^N A_{P(2i-1),P(2i)}\\
-                                                   &=\sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^N A_{P(2i-1),P(2i)}\\
+        \int\mathcal{D}\Psi \; \exp(-\Psi^T A \Psi/2)&=\int\mathcal{D}\Psi \; \frac{1}{2^N N!}(-1)^N N! \sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^{2N} \Psi_i \prod_{i=1}^N A_{P(2i-1),P(2i)}\\
+                                                   &=\frac{1}{2^N}\sum_{P\in S_{2N}} \text{sgn}(P) \prod_{i=1}^N A_{P(2i-1),P(2i)}\\
                                                    &=\operatorname{Pf}(A)
     \end{split}
 \end{equation}
