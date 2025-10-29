@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage{jheppub,physics,amsfonts,graphicx,tensor,cleveref}
+\usepackage[export]{adjustbox}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand{\cd}{\mathcal{D}}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\sgn}{sgn}
+\counterwithout{equation}{section}
+
+
+\title{Homework 4}
+\author{Shangjie Zhou}
+\emailAdd{zhou1468@purdue.edu}
+\toccontinuoustrue
+\notoc
+
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Problem 1}
+\subsection*{(a)}
+\subsubsection*{(i)}
+From the commutation relation of the angular momentum operators, we have
+\begin{subequations}
+    \begin{align}
+        S_z S_x-S_x S_z&=\ii \hbar S_y,\\
+        S_y S_z-S_z S_y&=\ii \hbar S_x,
+    \end{align}
+\end{subequations}
+which gives
+\begin{subequations}
+    \begin{align}
+        \bra{S,S}(S_z S_x-S_x S_z)\ket{S,S}&=\ii \hbar \bra{S,S}S_y\ket{S,S},\\
+        \bra{S,S}(S_y S_z-S_z S_y)\ket{S,S}&=\ii \hbar \bra{S,S}S_x\ket{S,S}.
+    \end{align}
+\end{subequations}
+Since $S_z\ket{S,S}=\hbar S\ket{S,S}$, we have
+\begin{subequations}
+    \begin{align}
+        \bra{S,S}(S_z S_x-S_x S_z)\ket{S,S}&=\hbar S \bra{S,S}S_x\ket{S,S}-\hbar S \bra{S,S}S_x\ket{S,S}=0,\\
+        \bra{S,S}(S_y S_z-S_z S_y)\ket{S,S}&=\hbar S \bra{S,S}S_y\ket{S,S}-\hbar S \bra{S,S}S_y\ket{S,S}=0.
+    \end{align}
+    \end{subequations}
+Thus, we have
+\begin{subequations}
+    \begin{align}
+        \bra{S,S}S_y\ket{S,S}&=0,\\
+        \bra{S,S}S_x\ket{S,S}&=0.
+    \end{align}
+\end{subequations}
+\subsubsection*{(ii)}
+Since $U=\exp(-\ii \phi S_z/\hbar)\exp(\ii \theta S_y/\hbar)$, we can use Baker–Campbell–Hausdorff formula and compute that
+\begin{equation}
+    U^\dagger S_z U=\exp(-\ii \theta S_y/\hbar)\,S_z\,\exp(\ii \theta S_y/\hbar).
+\end{equation}
+To evaluate this we set
+\[A=\ii\frac{\theta}{\hbar}S_y,\qquad\text{so}\qquad U^\dagger S_z U=e^{-A}S_z e^{A},\]
+and use the Baker--Campbell--Hausdorff (conjugation) expansion
+\[e^{-A}S_z e^{A}=S_z+[S_z,A]+\frac{1}{2!}[[S_z,A],A]+\frac{1}{3!}[[[S_z,A],A],A]+\cdots.\]
+Compute the first commutators using $[S_i,S_j]=\ii\hbar\epsilon_{ijk}S_k$:
+\begin{align*}
+    [S_z,A]&=\ii\frac{\theta}{\hbar}[S_z,S_y]=\ii\frac{\theta}{\hbar}(-\ii\hbar S_x)=\theta S_x,\\
+    [[S_z,A],A]&=\theta[S_x,A]=\theta\left(\ii\frac{\theta}{\hbar}[S_x,S_y]\right)=\theta\left(\ii\frac{\theta}{\hbar}(\ii\hbar S_z)\right)=-\theta^2 S_z.
+\end{align*}
+Substituting into the series gives
+\begin{align*}
+    e^{-A}S_z e^{A}&=S_z+\theta S_x-\frac{\theta^2}{2!}S_z-\frac{\theta^3}{3!}S_x+\frac{\theta^4}{4!}S_z+\cdots\\
+    &=S_z\Big(1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots\Big)+S_x\Big(\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots\Big)\\
+    &=S_z\cos\theta+S_x\sin\theta.
+\end{align*}
+
+
+%\bibliographystyle{jhep}
+%\bibliography{ref}
+\end{document}
