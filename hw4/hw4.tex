@@ -53,25 +53,137 @@ Thus, we have
     \end{align}
 \end{subequations}
 \subsubsection*{(ii)}
-Since $U=\exp(-\ii \phi S_z/\hbar)\exp(\ii \theta S_y/\hbar)$, we can use Baker–Campbell–Hausdorff formula and compute that
+Since $U=\exp(-\ii \phi S_z/\hbar)\exp(-\ii \theta S_y/\hbar)$, we can use Baker–Campbell–Hausdorff formula and compute that
 \begin{equation}
-    U^\dagger S_z U=\exp(-\ii \theta S_y/\hbar)\,S_z\,\exp(\ii \theta S_y/\hbar).
+    U^\dagger S_z U=\exp(\ii \theta S_y/\hbar)\,S_z\,\exp(-\ii \theta S_y/\hbar).
 \end{equation}
-To evaluate this we set
-\[A=\ii\frac{\theta}{\hbar}S_y,\qquad\text{so}\qquad U^\dagger S_z U=e^{-A}S_z e^{A},\]
-and use the Baker--Campbell--Hausdorff (conjugation) expansion
-\[e^{-A}S_z e^{A}=S_z+[S_z,A]+\frac{1}{2!}[[S_z,A],A]+\frac{1}{3!}[[[S_z,A],A],A]+\cdots.\]
-Compute the first commutators using $[S_i,S_j]=\ii\hbar\epsilon_{ijk}S_k$:
-\begin{align*}
-    [S_z,A]&=\ii\frac{\theta}{\hbar}[S_z,S_y]=\ii\frac{\theta}{\hbar}(-\ii\hbar S_x)=\theta S_x,\\
-    [[S_z,A],A]&=\theta[S_x,A]=\theta\left(\ii\frac{\theta}{\hbar}[S_x,S_y]\right)=\theta\left(\ii\frac{\theta}{\hbar}(\ii\hbar S_z)\right)=-\theta^2 S_z.
-\end{align*}
-Substituting into the series gives
-\begin{align*}
-    e^{-A}S_z e^{A}&=S_z+\theta S_x-\frac{\theta^2}{2!}S_z-\frac{\theta^3}{3!}S_x+\frac{\theta^4}{4!}S_z+\cdots\\
-    &=S_z\Big(1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots\Big)+S_x\Big(\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots\Big)\\
-    &=S_z\cos\theta+S_x\sin\theta.
-\end{align*}
+Using the BCH formula, we have
+\begin{equation}
+    \begin{split}
+        U^\dagger S_z U&= S_z +\frac{\ii \theta}{\hbar}[S_y,S_z] +\frac{1}{2!}\left(\frac{\ii \theta}{\hbar}\right)^2 [S_y,[S_y,S_z]] +\frac{1}{3!}\left(\frac{\ii \theta}{\hbar}\right)^3 [S_y,[S_y,[S_y,S_z]]]+\cdots\\
+                       &= S_z +\frac{\ii \theta}{\hbar}(\ii \hbar S_x) +\frac{1}{2!}\left(\frac{\ii \theta}{\hbar}\right)^2 (\ii \hbar)(\ii \hbar S_z) +\frac{1}{3!}\left(\frac{\ii \theta}{\hbar}\right)^3 (\ii \hbar)(\ii \hbar)(\ii \hbar S_x)+\cdots\\
+                       &= S_z \left(1 -\frac{\theta^2}{2!} +\frac{\theta^4}{4!} -\cdots\right) - S_x \left(\theta -\frac{\theta^3}{3!} +\frac{\theta^5}{5!} -\cdots\right)\\
+                          &= S_z \cos\theta - S_x \sin\theta.
+    \end{split}
+\end{equation}
+
+
+For $S_x$ we have a similar computation:
+\begin{equation}
+    \begin{split}
+        U^\dagger S_x U&=\exp(\ii \theta S_y/\hbar)\, \exp(\ii \phi S_z/\hbar) S_x\,\exp(-\ii \phi S_z/\hbar)\exp(-\ii \theta S_y/\hbar)\\
+                          &=\exp(\ii \theta S_y/\hbar) \left(S_x \cos\phi - S_y \sin\phi\right) \exp(-\ii \theta S_y/\hbar)\\
+                            &= \big(\exp(\ii \theta S_y/\hbar) S_x \exp(-\ii \theta S_y/\hbar)\big)\cos\phi - S_y\sin\phi\\
+                            &= \left(S_x\cos\theta + S_z\sin\theta\right)\cos\phi - S_y\sin\phi\\
+                            &= S_x\cos\theta\cos\phi + S_z\sin\theta\cos\phi - S_y\sin\phi.
+    \end{split}
+\end{equation}
+
+Similarly, for $S_y$ we have
+\begin{equation}
+    \begin{split}
+        U^\dagger S_y U&=\exp(\ii \theta S_y/\hbar)\, \exp(\ii \phi S_z/\hbar) S_y\,\exp(-\ii \phi S_z/\hbar)\exp(-\ii \theta S_y/\hbar)\\
+                          &=\exp(\ii \theta S_y/\hbar) \left(S_x \sin\phi + S_y \cos\phi\right) \exp(-\ii \theta S_y/\hbar)\\
+                            &= \big(\exp(\ii \theta S_y/\hbar) S_x \exp(-\ii \theta S_y/\hbar)\big)\sin\phi + S_y\cos\phi\\
+                            &= \left(S_x\cos\theta + S_z\sin\theta\right)\sin\phi + S_y\cos\phi\\
+                            &= S_x\cos\theta\sin\phi + S_y\cos\phi + S_z\sin\theta\sin\phi.
+    \end{split}
+\end{equation}
+
+
+\subsubsection*{(iii)}
+Since $\vb{S}=S_x \vb{i}+S_y \vb{j}+S_z \vb{k}$ and $\vb{\omega}=\sin{\theta}\cos{\phi}\vb{i}+\sin{\theta}\sin{\phi}\vb{j}+\cos{\theta}\vb{k}$, we have
+    \begin{equation}
+    \begin{split}
+        U^\dagger \vb{S} U&= U^\dagger S_x U \,\vb{i}+U^\dagger S_y U \,\vb{j}+U^\dagger S_z U \,\vb{k}\\
+                          &= (S_x\cos\theta\cos\phi + S_z\sin\theta\cos\phi - S_y\sin\phi)\,\vb{i} \\
+                          &\quad+ (S_x\cos\theta\sin\phi + S_y\cos\phi + S_z\sin\theta\sin\phi)\,\vb{j} \\
+                          &\quad+ ( - S_x\sin\theta + S_z\cos\theta)\,\vb{k}\\
+                          &= S_z \vb{\Omega}+\dots
+    \end{split}
+\end{equation}
+we only keep the $S_z$ term since in the state $\ket{S,S}$ the expectation values of $S_x$ and $S_y$ are zero from part (i).
+
+\subsubsection*{(iv)}
+\begin{equation}
+    \begin{split}
+        \bra{\Omega}\vb{S}\ket{\Omega}=\bra{S,S}U^\dagger \vb{S} U\ket{S,S}= \bra{S,S} S_z \vb{\Omega} \ket{S,S}=\hbar S \vb{\Omega}.
+    \end{split}
+\end{equation}
+
+\subsection*{(b)}
+\subsubsection*{(i)}
+Using $\ket{\omega}=\cos(\theta/2)\me^{-\ii\phi/2}\ket{1/2,1/2}+\sin(\theta/2)\me^{\ii\phi/2}\ket{1/2,-1/2}$ when $S=1/2$, we have the overlap
+\begin{equation}
+    \begin{split}
+        \bra{\omega_2}\ket{\omega_1} &= \left(\cos\frac{\theta_2}{2}\me^{\ii\phi_2/2}\bra{1/2,1/2}+\sin\frac{\theta_2}{2}\me^{-\ii\phi_2/2}\bra{1/2,-1/2}\right)\\
+        &\quad \cdot \left(\cos\frac{\theta_1}{2}\me^{-\ii\phi_1/2}\ket{1/2,1/2}+\sin\frac{\theta_1}{2}\me^{\ii\phi_1/2}\ket{1/2,-1/2}\right)\\
+        &=\cos\frac{\theta_2}{2}\cos\frac{\theta_1}{2}\me^{\ii(\phi_2-\phi_1)/2}+\sin\frac{\theta_2}{2}\sin\frac{\theta_1}{2}\me^{-\ii(\phi_2-\phi_1)/2}.
+    \end{split}
+\end{equation}
+
+\subsubsection*{(ii)}
+For the representation of $\text{SU}(2)$ group, we have the following relation:
+\begin{equation}\label{eq:su2}
+    \underbrace{\frac{1}{2}\otimes\frac{1}{2}\otimes\dots\otimes\frac{1}{2}}_{2S \text{ times}}=S\oplus\text{lower spin representation}
+\end{equation}
+Since $\ket{S,S}$ is the highest weight state of the spin-$S$ representation, it must be a linear combination of states in the tensor product space with all individual spins being in their highest weight states:
+\begin{equation}
+    \ket{S,S}=\underbrace{\ket{1/2,1/2}\otimes\ket{1/2,1/2}\otimes\dots\otimes\ket{1/2,1/2}}_{2S \text{ times}}.
+\end{equation}
+
+\subsubsection*{(iii)}
+From the \cref{eq:su2}, we know that 
+\begin{equation}
+    \begin{split}
+        \ket{\Omega}_S=U_{S}\ket{S,S}&=\underbrace{U_{1/2}\ket{1/2,1/2}\otimes U_{1/2}\ket{1/2,1/2}\otimes\dots\otimes U_{1/2}\ket{1/2,1/2}}_{2S \text{ times}}\\
+                                     &=\underbrace{\ket{\Omega}_{1/2}\otimes\ket{\Omega}_{1/2}\otimes\dots\otimes\ket{\Omega}_{1/2}}_{2S \text{ times}}.
+    \end{split}
+\end{equation}
+where the underscript in $U$ indicates the representation it acts on.
+Therefore, the overlap is
+\begin{equation}
+    \begin{split}
+        \bra{\Omega_2}\ket{\Omega_1}_S&=\underbrace{\bra{\Omega_2}_{1/2}\otimes\bra{\Omega_2}_{1/2}\otimes\dots\otimes\bra{\Omega_2}_{1/2}}_{2S \text{ times}} \cdot \underbrace{\ket{\Omega_1}_{1/2}\otimes\ket{\Omega_1}_{1/2}\otimes\dots\otimes\ket{\Omega_1}_{1/2}}_{2S \text{ times}}\\
+                                      &=\left(\bra{\Omega_2}_{1/2}\ket{\Omega_1}_{1/2}\right)^{2S}\\
+                                      &=\left(\cos\frac{\theta_2}{2}\cos\frac{\theta_1}{2}\me^{\ii(\phi_2-\phi_1)/2}+\sin\frac{\theta_2}{2}\sin\frac{\theta_1}{2}\me^{-\ii(\phi_2-\phi_1)/2}\right)^{2S}.
+    \end{split}
+\end{equation}
+
+
+\subsection*{(c)}
+We can show that for $S=1/2$:
+\begin{equation}
+    \begin{split}
+        \frac{2S+1}{4\pi}\int \dd{\Omega}\ket{\Omega}\bra{\Omega}&=\frac{2}{4\pi}\int_0^{2\pi}\dd{\phi}\int_0^{\pi}\dd{\theta}\sin{\theta}\left(\cos\frac{\theta}{2}\me^{-\ii\phi/2}\ket{1/2,1/2}+\sin\frac{\theta}{2}\me^{\ii\phi/2}\ket{1/2,-1/2}\right)\\
+        &\quad \cdot \left(\cos\frac{\theta}{2}\me^{\ii\phi/2}\bra{1/2,1/2}+\sin\frac{\theta}{2}\me^{-\ii\phi/2}\bra{1/2,-1/2}\right)\\
+        &=\int_0^{\pi}\dd{\theta}\sin{\theta}\left(\cos^2\frac{\theta}{2}\ket{1/2,1/2}\bra{1/2,1/2}+\sin^2\frac{\theta}{2}\ket{1/2,-1/2}\bra{1/2,-1/2}\right)
+    \end{split}
+\end{equation}
+The remaining integrals can be computed as
+\begin{subequations}
+    \begin{align}
+        \int_0^{\pi}\dd{\theta}\sin{\theta}\cos^2\frac{\theta}{2}&=\int_0^{\pi}\dd{\theta}\sin{\theta}\frac{1+\cos{\theta}}{2}=\frac{1}{2}\left(\int_0^{\pi}\dd{\theta}\sin{\theta}+\int_0^{\pi}\dd{\theta}\sin{\theta}\cos{\theta}\right)=1,\\
+        \int_0^{\pi}\dd{\theta}\sin{\theta}\sin^2\frac{\theta}{2}&=\int_0^{\pi}\dd{\theta}\sin{\theta}\frac{1-\cos{\theta}}{2}=\frac{1}{2}\left(\int_0^{\pi}\dd{\theta}\sin{\theta}-\int_0^{\pi}\dd{\theta}\sin{\theta}\cos{\theta}\right)=1.
+    \end{align}
+\end{subequations}
+Thus, we have
+\begin{equation}
+    \frac{2S+1}{4\pi}\int \dd{\Omega}\ket{\Omega}\bra{\Omega}=\ket{1/2,1/2}\bra{1/2,1/2}+\ket{1/2,-1/2}\bra{1/2,-1/2}=\mathbb{I}_{1/2}.
+\end{equation}
+
+Using the resolution of identity, the propagator can be written as
+\begin{equation}
+    \begin{split}
+        K(\Omega_f,t_f;\Omega_i,t_i)&=\bra{\Omega_f}\me^{-\ii \hat{H}(t_f-t_i)/\hbar}\ket{\Omega_i}\\
+                                    &=\left(\frac{2S+1}{4\pi}\right)^{N-1}\int \dd{\Omega_1}\dd{\Omega_2}\dots\dd{\Omega_{N-1}}\\
+        &\quad \cdot \bra{\Omega_f}\me^{-\ii \hat{H}(t_f-t_i)/N\hbar}\ket{\Omega_{N-1}}\bra{\Omega_{N-1}}\me^{-\ii \hat{H}(t_f-t_i)/N\hbar}\ket{\Omega_{N-2}}\dots\\
+        &\quad \cdot \bra{\Omega_1}\me^{-\ii \hat{H}(t_f-t_i)/N\hbar}\ket{\Omega_i},
+    \end{split}
+\end{equation}
+
+\subsection*{(d)}
+
 
 
 %\bibliographystyle{jhep}
