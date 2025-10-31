@@ -223,6 +223,105 @@ and we have added a total time derivative term $\hbar S \dot{\phi}$ to the Lagra
 
 \section*{Problem 2}
 \subsection*{(a)}
+From the periodic boundary condition, we know that 
+\begin{equation}
+    \sum_{i=1}^N s_i=\sum_{i=1}^N s_{i+1}
+\end{equation}
+and thus the Boltzmann weight can be written as
+\begin{equation}
+    \begin{split}
+        \exp(-\beta H)=\exp(\beta J\sum_{i=1}^N s_i s_{i+1}+\beta h \sum_{i=1}^N s_i)=\prod_{i=1}^N \exp[\beta J s_i s_{i+1}+\frac{\beta h}{2}(s_i+s_{i+1})].
+    \end{split}
+\end{equation}
+
+\subsection*{(b)}
+From $T_{s,s'}=\exp(\beta J s s'+\beta h(s+s')/2)$, we have the matrix elements
+\begin{equation}
+    T=\mqty(
+        \me^{\beta J+\beta h} & \me^{-\beta J}\\
+        \me^{-\beta J} & \me^{\beta J-\beta h}
+    ).
+\end{equation}
+
+\subsection*{(c)}
+The Boltzmann weight can be written in terms of the transfer matrix as
+\begin{equation}
+    \exp(-\beta H)=\prod_{i=1}^N T_{s_i,s_{i+1}}.
+\end{equation}
+Thus, the partition function is
+\begin{equation}
+    \begin{split}
+        Z_N&=\sum_{\{s_i\}}\exp(-\beta H)\\
+         &=\sum_{\{s_i\}}\prod_{i=1}^N T_{s_i,s_{i+1}}\\
+         &=\sum_{s_1}\sum_{s_2}\dots\sum_{s_N} T_{s_1,s_2}T_{s_2,s_3}\dots T_{s_N,s_1}\\
+         &=\text{Tr}(T^N).
+    \end{split}
+\end{equation}
+The periodic boundary condition give us $\sum_{s_1}(T^N)_{s_1,s_1}$ which is the trace of $T^N$.    
+
+\subsection*{(d)}
+If we write $K=\beta J$ and $H=\beta h$, the transfer matrix can be written as
+\begin{equation}
+    T=\mqty(
+        \me^{K+H} & \me^{-K}\\
+        \me^{-K} & \me^{K-H}
+    ).
+\end{equation}
+The eigenvalues can be solved from the characteristic equation:
+\begin{equation}
+    \det(T-\lambda \mathbb{I})=0,
+\end{equation}
+which gives
+\begin{equation}
+    \lambda^2 -2\lambda \me^{K}\cosh{H}+\me^{2K}-\me^{-2K}=0.
+\end{equation}
+The solutions are
+\begin{equation}
+    \lambda_{\pm}=\me^{K}\left(\cosh{H}\pm\sqrt{\sinh^2{H}+\me^{-4K}}\right).
+\end{equation}
+
+\subsection*{(e)}
+Since the transfer matrix is a $2\times 2$ real symmetric matrix, it can be diagonalized as
+\begin{equation}
+    T=PDP^{-1}
+\end{equation}
+where $D=\text{diag}(\lambda_+,\lambda_-)$ is the diagonal matrix of eigenvalues and $P$ is the matrix of eigenvectors.
+The partition function can be computed as
+\begin{equation}
+    \begin{split}
+        Z_N&=\text{Tr}(T^N)\\
+           &=\text{Tr}(PD^N P^{-1})\\
+           &=\text{Tr}(D^N)\\
+           &=\lambda_+^N+\lambda_-^N.
+    \end{split}
+\end{equation}
+The free energy in the thermodynamic limit is
+\begin{equation}
+    \begin{split}
+        f(J,h,T)&=-\frac{1}{\beta}\ln{\lambda_+}=-\frac{1}{\beta}\left(K+\ln\left(\cosh{H}+\sqrt{\sinh^2{H}+\me^{-4K}}\right)\right)\\
+                &=-J-T\ln\left[\cosh(\frac{h}{T})+\sqrt{\sinh[2](\frac{h}{T})+\exp(-\frac{4J}{T})}\right].
+    \end{split}
+\end{equation}
+
+\subsection*{(f)}
+The magnetization per spin is 
+\begin{equation}
+    \begin{split}
+        m=-\pdv{f}{h}&=\frac{\sinh{H}}{\sqrt{\sinh^2{H}+\me^{-4K}}}\\
+                    &=\frac{\sinh{(h/T)}}{\sqrt{\sinh^2{(h/T)}+\exp(-4J/T)}}.
+    \end{split}
+\end{equation}
+and the zero-field susceptibility is
+\begin{equation}
+    \chi=\eval{\pdv{m}{h}}_{h=0}=\frac{\beta \me^{2K}}{1+\me^{-2K}}=\frac{1}{T}\frac{\me^{2J/T}}{1+\exp(-2J/T)}.
+\end{equation}
+When $T\to 0$ and $T\to\infty$, we have 
+\begin{equation}
+    \begin{split}
+        \chi&\to \frac{1}{T}\me^{2J/T} \quad (T\to 0)\\
+            &\to 0 \quad (T\to\infty).
+    \end{split}
+\end{equation}
 
 %\bibliographystyle{jhep}
 %\bibliography{ref}
