@@ -183,8 +183,46 @@ Using the resolution of identity, the propagator can be written as
 \end{equation}
 
 \subsection*{(d)}
+We can expand the matrix element as
+\begin{equation}
+    \begin{split}
+        \mel**{\Omega_{k+1}}{\me^{-\ii \hat{H}\epsilon/\hbar}}{\Omega_k}&=\mel**{\Omega_{k+1}}{\mathbb{I}-\frac{\ii \epsilon}{\hbar}\hat{H}+\mathcal{O}(\epsilon^2)}{\Omega_k}\\
+        &=\bra{\Omega_{k+1}}\ket{\Omega_k}-\frac{\ii \epsilon}{\hbar}\bra{\Omega_{k+1}}\hat{H}\ket{\Omega_k}+\mathcal{O}(\epsilon^2)\\
+        &=\bra{\Omega_{k+1}}\ket{\Omega_k}\left(1-\frac{\ii \epsilon}{\hbar}\frac{\bra{\Omega_{k+1}}\hat{H}\ket{\Omega_k}}{\bra{\Omega_{k+1}}\ket{\Omega_k}}+\mathcal{O}(\epsilon^2)\right)\\
+        &=\bra{\Omega_{k+1}}\ket{\Omega_k}\exp\left(-\frac{\ii \epsilon}{\hbar}\frac{\bra{\Omega_{k+1}}\hat{H}\ket{\Omega_k}}{\bra{\Omega_{k+1}}\ket{\Omega_k}}\right)\\
+        &=\exp(\ln{\bra{\Omega_{k+1}}\ket{\Omega_k}}-\frac{\ii \epsilon}{\hbar}\frac{\bra{\Omega_{k+1}}\hat{H}\ket{\Omega_k}}{\bra{\Omega_{k+1}}\ket{\Omega_k}})\\
+        &=\exp(\ln{\bra{\Omega_{k+1}}\ket{\Omega_k}}-\frac{\ii\epsilon}{\hbar}\mathcal{H}(\vb{\Omega_k}))
+    \end{split}
+\end{equation}
 
+If we write $\theta_{k+1}=\theta_k+\dot{\theta}_k\epsilon$ and $\phi_{k+1}=\phi_k+\dot{\phi}_k\epsilon$, then to first order in $\epsilon$ the correct expansion is
+\begin{equation}
+    \begin{split}
+        \ln{\bra{\Omega_{k+1}}\ket{\Omega_k}}&=2S\ln\Big(\cos\tfrac{\theta_{k+1}}{2}\cos\tfrac{\theta_k}{2}\,\me^{\ii(\phi_{k+1}-\phi_k)/2}+\sin\tfrac{\theta_{k+1}}{2}\sin\tfrac{\theta_k}{2}\,\me^{-\ii(\phi_{k+1}-\phi_k)/2}\Big)\\
+        &=2S\ln\Big(1+\ii\tfrac{\dot{\phi}_k\epsilon}{2}\cos\theta_k\Big)\\
+        &=2S\Big(\ii\tfrac{\dot{\phi}_k\epsilon}{2}\Big)\cos\theta_k\\
+        &=\ii S\dot{\phi}_k\epsilon\cos\theta_k.
+    \end{split}
+\end{equation}
+Therefore, the propagator can be written as
+\begin{equation}
+    \begin{split}
+        K(\Omega_f,t_f;\Omega_i,t_i)&=\lim_{N\to\infty}\left(\frac{2S+1}{4\pi}\right)^{N-1}\int \dd{\Omega_1}\dd{\Omega_2}\dots\dd{\Omega_{N-1}}\\
+        &\quad \cdot \exp\Bigg(\sum_{k=0}^{N-1}\left[\ii S\dot{\phi}_k\epsilon\cos\theta_k -\frac{\ii\epsilon}{\hbar}\mathcal{H}(\vb{\Omega_k})\right]\Bigg)\\
+        &=\int \cd{(\Omega(t))}\exp\left(\frac{\ii}{\hbar}\int_{t_i}^{t_f}\dd{t}\left[\hbar S \dot{\phi}\cos\theta-\mathcal{H}(\vb{\Omega}(t))\right]\right)\\
+        &=\int_{\Omega(t_i)=\Omega_i}^{\Omega(t_f)=\Omega_f}\cd\Omega(t)\me^{\frac{\ii}{\hbar}S[\vb{\Omega}]}
+    \end{split}
+\end{equation}
+where the action is
+\begin{equation}
+    S[\vb{\Omega}]=\int_{t_i}^{t_f}\dd{t}\left[\hbar S \dot{\phi}(1-\cos\theta)-\mathcal{H}(\vb{\Omega}(t))\right].
+\end{equation}
+and we have added a total time derivative term $\hbar S \dot{\phi}$ to the Lagrangian which does not affect the equations of motion.
 
+\subsection*{(e)}
+
+\section*{Problem 2}
+\subsection*{(a)}
 
 %\bibliographystyle{jhep}
 %\bibliography{ref}
