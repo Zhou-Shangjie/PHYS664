@@ -323,6 +323,41 @@ When $T\to 0$ and $T\to\infty$, we have
     \end{split}
 \end{equation}
 
+\subsection*{(g)}
+The connected correlation function can be computed as
+\begin{equation}
+    \begin{split}
+        \ev{s_i s_j}-\ev{s_i}\ev{s_j}&=\frac{1}{Z_N}\sum_{\{s_k\}} s_i s_j \exp(-\beta H)-\left(\frac{1}{Z_N}\sum_{\{s_k\}} s_i \exp(-\beta H)\right)\left(\frac{1}{Z_N}\sum_{\{s_k\}} s_j \exp(-\beta H)\right)\\
+                                     &=\frac{1}{Z_N}\text{Tr}(S T^{j-i} S T^{N-j+i})-\left(\frac{1}{Z_N}\text{Tr}(S T^N)\right)^2
+    \end{split}
+\end{equation}
+where $S=\text{diag}(1,-1)$ is the spin operator in the $\{s=\pm 1\}$ basis.
+By diagonalizing the transfer matrix, we have
+\begin{equation}
+    \begin{split}
+        \ev{s_i s_j}-\ev{s_i}\ev{s_j}&=\frac{1}{Z_N}\text{Tr}(P S P^{-1} D^{j-i} P S P^{-1} D^{N-j+i})-\left(\frac{1}{Z_N}\text{Tr}(P S P^{-1} D^N)\right)^2\\
+                                     &=\frac{1}{Z_N}\text{Tr}(\tilde{S} D^{j-i} \tilde{S} D^{N-j+i})-\left(\frac{1}{Z_N}\text{Tr}(\tilde{S} D^N)\right)^2
+    \end{split}
+\end{equation}
+where $\tilde{S}=P S P^{-1}$.
+By writing out the matrix elements, we have
+\begin{equation}
+    \begin{split}
+        \ev{s_i s_j}-\ev{s_i}\ev{s_j}&=\frac{1}{Z_N}\left(\tilde{S}_{11}^2 \lambda_+^N+\tilde{S}_{22}^2 \lambda_-^N+\tilde{S}_{12}\tilde{S}_{21}\lambda_+^{j-i}\lambda_-^{N-j+i}+\tilde{S}_{21}\tilde{S}_{12}\lambda_-^{j-i}\lambda_+^{N-j+i}\right)\\
+                                     &\quad -\left(\frac{1}{Z_N}(\tilde{S}_{11}\lambda_+^N+\tilde{S}_{22}\lambda_-^N)\right)^2.
+    \end{split}
+\end{equation}
+and after plugging in $Z_N=\lambda_+^N+\lambda_-^N$, we obtain
+\begin{equation}
+    \ev{s_i s_j}-\ev{s_i}\ev{s_j}=\frac{\tilde{S}_{12}\tilde{S}_{21}}{Z_N^2}\left(\lambda_+^{j-i}\lambda_-^{N-j+i}+\lambda_-^{j-i}\lambda_+^{N-j+i}\right)+\frac{\lambda_+^N \lambda_-^N}{Z_N^2}(\tilde{S}_{11}-\tilde{S}_{22})^2.
+\end{equation}
+In the thermodynamic limit $N\to\infty$, we have $N\to\infty$ and $(\lambda_+/\lambda_-)^N\to 0$, thus the connected correlation function becomes
+\begin{equation}
+    \ev{s_i s_j}-\ev{s_i}\ev{s_j}=\tilde{S}_{12}\tilde{S}_{21}\left(\frac{\lambda_-}{\lambda_+}\right)^{|j-i|}.
+\end{equation}
+
+
+
 %\bibliographystyle{jhep}
 %\bibliography{ref}
 \end{document}
