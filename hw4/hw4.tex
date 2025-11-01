@@ -355,8 +355,107 @@ In the thermodynamic limit $N\to\infty$, we have $N\to\infty$ and $(\lambda_+/\l
 \begin{equation}
     \ev{s_i s_j}-\ev{s_i}\ev{s_j}=\tilde{S}_{12}\tilde{S}_{21}\left(\frac{\lambda_-}{\lambda_+}\right)^{|j-i|}.
 \end{equation}
+Therefore, we have 
+\begin{equation}
+    \expval{s_i s_{i+r}}-\expval{s_i}\expval{s_{i+r}} \propto \left(\frac{\lambda_-}{\lambda_+}\right)^{|r|}.   
+\end{equation}
+The correlation length is defined by 
+\begin{equation}
+    \xi=\left(\ln{\frac{\lambda_+}{\lambda_-}}\right)^{-1}= \left(\ln{\frac{\cosh{H}+\sqrt{\sinh^2{H}+\me^{-4K}}}{\cosh{H}-\sqrt{\sinh^2{H}+\me^{-4K}}}}\right)^{-1}.
+\end{equation}
+and when $h=0$, we have
+\begin{equation}
+    \xi^{-1}=\left(\ln{\coth{K}}\right).
+\end{equation}
+\subsection*{(h)}
 
+\section*{Problem 3}
+\subsection*{(1)}
+The partition function is 
+\begin{equation}
+    Z=\sum_{\{s_i=\pm1\}}\exp[\frac{\beta J}{2}\sum_{i,j}C_{ij}s_i s_j+\beta h \sum_i s_i]. 
+\end{equation}
+After defining $K\equiv \beta J C$, the partition function can be written as
+\begin{equation}
+    Z=\sum_{\{s_i=\pm1\}}\exp[\frac{1}{2}\sum_{i,j}K_{ij}s_i s_j+\beta h \sum_i s_i]=\sum_{\{s\}}\exp(\frac{1}{2}s^T K s+\beta h^T s).
+\end{equation} 
+\subsection*{(2)}
+After using the Guassian integral identity, we have
+\begin{equation}
+    \exp(\frac{1}{2} s^T K s)=\mathcal{N}\int \dd{\phi}\exp(-\frac{1}{2}\phi^T K \phi + s^T  \phi).
+\end{equation}
+Thus, the partition function can be written as
+\begin{equation}
+    \begin{split}
+        Z&=\mathcal{N}\int \dd{\phi}\exp(-\frac{1}{2}\phi^T K \phi)\sum_{\{s\}}\exp(s^T(\phi+\beta h))\\
+         &=\mathcal{N}\int \dd{\phi}\exp(-\frac{1}{2}\phi^T K \phi)\sum_{s_i=\pm 1} \prod_{i=1}^N \exp(s_i(\phi_i+\beta h))\\
+         &=\mathcal{N}\int \dd{\phi}\exp(-\frac{1}{2}\phi^T K \phi)\prod_{i=1}^N \sum_{s_i=\pm 1}\exp(s_i(\phi_i+\beta h))\\
+         &=\mathcal{N}\int \dd{\phi}\exp(-\frac{1}{2}\phi^T K \phi)\prod_{i=1}^N 2\cosh(\phi_i+\beta h)\\
+         &=\mathcal{N}\int \dd{\phi}\exp\left(-\frac{1}{2}\phi^T K \phi +\sum_{i=1}^N \ln{[2\cosh(\phi_i+\beta h)]}\right).
+    \end{split}
+\end{equation}
+In order to have a positive definite $K$, we require that all eigenvalues of $K$ are positive, which can be done by adding a sufficiently large positive constant to the diagonal elements of $K$:
+\begin{equation}
+    K\to K+\epsilon \mathbb{I}, \quad \epsilon>\min(\lambda_i\text{ of }K)\quad\text{if } \min(\lambda_i\text{ of }K)<0.
+\end{equation}
+\subsection*{(3)}
+If we write 
+\begin{equation}
+    Z=\int\mathcal{\phi}\exp(-S_{\text{eff}}[\phi]),
+\end{equation}
+we can identify the effective action as
+\begin{equation}
+    S_{\text{eff}}[\phi]=\frac{1}{2}\phi^T K \phi -\sum_{i=1}^N \ln{[2\cosh(\phi_i+\beta h)]}+\text{const}.
+\end{equation}
+The first term in $S_{\text{eff}}[\phi]$ is a quadratic form in $\phi$ and it is non-local since there will be terms like $\phi_i\phi_k$ with $i\neq k$.
+The second term is a sum of logarithmic functions which is local in $\phi$.
+\subsection*{(4)}
+Since the system is translationally invariant, we have the following Fourier transforms 
+\begin{subequations}
+    \begin{align}
+        \phi_i&=\frac{1}{\sqrt{N}}\sum_{k\in\text{BZ}}\me^{\ii k\cdot r_i}\phi_k,\\
+        C_{ij}&=\frac{1}{N}\sum_{k\in\text{BZ}}\me^{\ii k\cdot (r_i-r_j)}C(k).
+    \end{align}
+\end{subequations}
+The inverse of $K$ in momentum space is now
+\begin{equation}
+    K^{-1}(k)=\frac{1}{\beta J C(k)}
+\end{equation}
+and the quadratic term in the effective action can be written as
+\begin{equation}
+    \begin{split}
+        \frac{1}{2}\sum_{i,j}\phi_i K^{-1}_{ij} \phi_j=\frac{1}{2}\sum_{k\in\text{BZ}}\phi_{-k} K^{-1}(k) \phi_k=\frac{1}{2\beta J}\sum_{k\in\text{BZ}}\frac{1}{C(k)}\phi_{-k}\phi_k=\frac{1}{2\beta J}\sum_{k\in\text{BZ}}\frac{1}{C(k)}|\phi_k|^2.
+    \end{split}
+\end{equation}
+When $C(k)=0$ for some $k$, then a regularization is needed and the quadratic term can be modified as
+\begin{equation}
+    \frac{1}{2\beta J}\sum_{k\in\text{BZ}}\frac{1}{C(k)+\epsilon}|\phi_k|^2, \quad \epsilon>0.
+\end{equation}
+\subsection*{(5)}
+The expansion of $C(k)$ around $k=0$ is 
+\begin{equation}
+    C(k)=C(0)-\alpha a^2 k^2=z-\alpha a^2 k^2.
+\end{equation}
+Thus, we have the small-$k$ approximation 
+\begin{equation}
+    \frac{1}{\beta J C(k)}\approx\frac{1}{\beta J z}\frac{1}{1-(\alpha/z)a^2 k^2}\approx \frac{1}{\beta J z}\left(1+\frac{\alpha a^2}{z}k^2\right).
+\end{equation}
+After transforming back to real space, the quadratic term in the effective action becomes
+\begin{equation}
+    \begin{split}
+        \frac{1}{2}\sum_{i,j}\phi_i K^{-1}_{ij} \phi_j&\approx\frac{1}{2\beta J z}\sum_{k\in\text{BZ}}\left(1+\frac{\alpha a^2}{z}k^2\right)|\phi_k|^2\\
+        &=\frac{1}{2\beta J z}\int \dd{^d x}\left(\phi(x)^2+\frac{\alpha a^2}{z}(\nabla \phi(x))^2\right)=\int \dd[d]{x}\left[\frac{r_0}{2}\phi(x)^2+\frac{\kappa}{2}(\grad{\phi(x)})^2\right]
+    \end{split}
+\end{equation}
+where we have defined
+\begin{subequations}
+    \begin{align}
+        r_0&=\frac{1}{\beta J z},\\
+        \kappa&=\frac{\alpha a^2}{\beta J z^2}.
+    \end{align}
+\end{subequations}
 
+\subsection*{(6)}
 
 %\bibliographystyle{jhep}
 %\bibliography{ref}
