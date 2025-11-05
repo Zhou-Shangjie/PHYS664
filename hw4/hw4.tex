@@ -220,6 +220,25 @@ where the action is
 and we have added a total time derivative term $\hbar S \dot{\phi}$ to the Lagrangian which does not affect the equations of motion.
 
 \subsection*{(e)}
+Notice that 
+\begin{equation}
+    \int_{t_i}^{t_f}\dd{t}(1-\cos{\theta})\dot{\phi}=\int_{t_i}^{t_f}\dd{t}(1-\cos{\theta})\frac{\dd{\phi}}{\dd{t}}\dd{t}=\int_{\phi_i}^{\phi_f}(1-\cos{\theta})\dd{\phi}
+\end{equation}
+and this integral represents the area on the unit sphere enclosed by the path of $\vb{\Omega}(t)$.
+Therefore, the first term is 
+\begin{equation}
+    \hbar S \int_{t_i}^{t_f}\dd{t}(1-\cos{\theta})\dot{\phi}=\hbar S  \mathcal{A}.
+\end{equation}
+However, there is a subtlety here since the oriented area $\mathcal{A}$ depends on the choice of the surface bounded by the path.
+If we choose the other surface bounded by the path, the oriented area would be $\mathcal{A}-4\pi$.
+Therefore, if $\me^{\ii S\mathcal{A}}$ is to be single-valued, we must have
+\begin{equation}
+    \me^{\ii S\mathcal{A}}=\me^{\ii S(\mathcal{A}-4\pi)}
+\end{equation}
+which gives the quantization condition
+\begin{equation}
+    2S\in \mathbb{Z}.
+\end{equation}
 
 \section*{Problem 2}
 \subsection*{(a)}
@@ -261,7 +280,7 @@ The periodic boundary condition give us $\sum_{s_1}(T^N)_{s_1,s_1}$ which is the
 
 \subsection*{(d)}
 If we write $K=\beta J$ and $H=\beta h$, the transfer matrix can be written as
-\begin{equation}
+\begin{equation}\label{transfer_matrix_1}
     T=\mqty(
         \me^{K+H} & \me^{-K}\\
         \me^{-K} & \me^{K-H}
@@ -368,6 +387,75 @@ and when $h=0$, we have
     \xi^{-1}=\left(\ln{\coth{K}}\right).
 \end{equation}
 \subsection*{(h)}
+The partition function is 
+\begin{equation}
+    Z_N=\sum_{\{s_i\}}\me^{-\beta H}=\sum_{\{s_i\}}\prod_{i=1}^N \me^{K s_i s_{i+1}}.
+\end{equation}
+After integrating out the spins at sites $3i-2$ and $3i$, the terms that involve $s_2$ and $s_5$ can be expressed as
+\begin{equation}\label{eq:RG_1}
+    \me^{K' s_2 s_5}=\sum_{s_3,s_4} \me^{K ( s_2 s_3+s_3 s_4 + s_4 s_5)}
+\end{equation}
+Using the identify $\me^{K s_i s_j}=\cosh(K) + \sinh(K) s_i s_j$, we can write
+\begin{equation}\label{eq:RG_2}
+    \begin{split}
+        \sum_{s_3,s_4} \me^{K ( s_2 s_3+s_3 s_4 + s_4 s_5)} &= \sum_{s_3,s_4}(\cosh{K}+\sinh{K} s_2 s_3)(\cosh{K}+\sinh{K} s_3 s_4)(\cosh{K}+\sinh{K} s_4 s_5)\\
+                                                            &=\sum_{s_3,s_4}\cosh^3 K(1+\tanh{K} s_2 s_3)(1+\tanh{K} s_3 s_4)(1+\tanh{K} s_4 s_5)\\
+                                                            &=4\cosh^3 K(1+\tanh^3{K} s_2 s_5)\\
+    \end{split}
+\end{equation}
+Compare \cref{eq:RG_1} and \cref{eq:RG_2} up to first order and ignore the constant shift, we have
+\begin{equation}
+    \tanh{K'}=\tanh^3{K}.
+\end{equation}
+Using the RG recursion relation, we can find the fixed points by solving
+\begin{equation}
+    \tanh{K^*}=\tanh^3{K^*}.
+\end{equation}
+The solutions are $K^*=0$ and $K^*=\infty$.
+
+\subsection*{(i)}
+From \cref{transfer_matrix_1}, when $H=0$, we have
+\begin{equation}
+    T=\mqty(
+        \me^{K} & \me^{-K}\\
+        \me^{-K} & \me^{K}
+    )=C \me^{\tilde{K}\sigma_x}.
+\end{equation}
+where $\tanh\tilde{K}=\me^{-2K}$ and $C$ is a constant.
+After using $\sigma_x^2=1$, we have 
+\begin{equation}
+    \begin{split}
+        \me^{\tilde{K}\sigma_x}&=1+\tilde{K}\sigma_x+\frac{\tilde{K}^2}{2!}\sigma_x^2+\frac{\tilde{K}^3}{3!}\sigma_x^3+\dots\\
+                               &=\left(1+\frac{\tilde{K}^2}{2!}+\frac{\tilde{K}^4}{4!}+\dots\right)+\left(\tilde{K}+\frac{\tilde{K}^3}{3!}+\frac{\tilde{K}^5}{5!}+\dots\right)\sigma_x\\
+                               &=\cosh{\tilde{K}}+\sinh{\tilde{K}}\sigma_x.
+    \end{split}
+\end{equation}
+
+In the 2D case, the transfer matrix along the $y$-direction can be written as
+\begin{equation}
+    T_{\{s\},\{s'\}}\propto\exp\left[K\sum_{i=1}^N s_i s'_i + K \sum_{i=1}^N s'_i s'_{i+1}\right].
+\end{equation}
+We can rewrite the transfer matrix as
+\begin{equation}
+    T\propto\exp\left(K \sum_{i=1}^N s_i s'_i\right) \exp\left(K \sum_{i=1}^N s'_i s'_{i+1}\right).
+\end{equation}
+The first term can be identified with $\exp(\tilde{K}\sum_j \sigma^x_j)$ and the second term can be identified with $\exp(K\sum_j \sigma^z_j \sigma^z_{j+1})$.
+Notice that
+\begin{subequations}
+    \begin{align}
+        \exp(\tilde{K}\sum_j \sigma^x_j)_{\{s\},\{s'\}}&=\exp(\tilde{K}\sum_i s_i s'_{i})\\
+        \exp(K\sum_j \sigma^z_j \sigma^z_{j+1})_{\{s\},\{s'\}}&=\exp(K\sum_i s_i s_{i+1})\delta_{\{s\},\{s'\}}
+    \end{align}
+\end{subequations}
+Thus, we can verify that 
+\begin{equation}
+    \begin{split}
+        T_{\{s\},\{s'\}}&\propto \sum_{\{s''\}}\exp(\tilde{K}\sum_j \sigma^x_j)_{\{s\},\{s''\}} \exp(K\sum_j \sigma^z_j \sigma^z_{j+1})_{\{s''\},\{s'\}}\\
+                        &\propto T_{\{s\},\{s'\}}\propto\exp\left[K\sum_{i=1}^N s_i s'_i + K \sum_{i=1}^N s'_i s'_{i+1}\right].
+    \end{split}
+\end{equation}
+
+
 
 \section*{Problem 3}
 \subsection*{(1)}
@@ -456,6 +544,29 @@ where we have defined
 \end{subequations}
 
 \subsection*{(6)}
+We can expand the logarithmic term in the effective action as
+\begin{equation}
+    \begin{split}
+        -\sum_{i=1}^N \ln{[2\cosh(\phi_i+\beta h)]}&=-\sum_{i=1}^N \ln{2}-\sum_{i=1}^N \ln{\left[1+\frac{(\phi_i+\beta h)^2}{2!}+\frac{(\phi_i+\beta h)^4}{4!}+\dots\right]}\\
+        &\approx -\sum_{i=1}^N \ln{2}-\sum_{i=1}^N \left[\frac{(\phi_i+\beta h)^2}{2}-\frac{(\phi_i+\beta h)^4}{12}+\dots\right]
+    \end{split}
+\end{equation}
+After combining with the quadratic term, the effective action can be written as
+\begin{equation}
+    \begin{split}
+        S_{\text{eff}}[\phi]&=\int \dd[d]{x}\left[\frac{\kappa}{2}(\grad{\phi(x)})^2+\frac{r}{2}\phi(x)^2 +\frac{u}{4!} \phi(x)^4 -H_{\text{eff}}\phi(x)\right]+\text{const}
+    \end{split}
+\end{equation}
+where we have defined
+\begin{subequations}
+    \begin{align}
+        r&=r_0-1+\beta^2 h^2,\\
+        u&=2,\\
+        H_{\text{eff}}&=\beta h-\frac{\beta^3 h^3}{3}.
+    \end{align}
+\end{subequations}
+$r$ and $\kappa$ are the coefficients of the mass term and the gradient term of the low-energy effective action, respectively, which are related to the microscopic parameters of the original Ising model.
+
 
 %\bibliographystyle{jhep}
 %\bibliography{ref}
