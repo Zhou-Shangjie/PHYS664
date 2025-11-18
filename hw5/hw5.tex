@@ -28,6 +28,31 @@
 
 
 \section*{Problem 3}
+\subsection*{(i)}
+\subsubsection*{(a)}
+We can directly verify that 
+\begin{equation}
+    (\mu^x_{i+1/2})^2=\sigma^z_i \sigma^z_{i+1} \sigma^z_i \sigma^z_{i+1}=(\sigma^z_i)^2(\sigma^z_{i+1})^2=1
+\end{equation}
+\begin{equation}
+    (\mu^z_{i+1/2})^2=\prod_{j\leq i} \sigma^x_j \prod_{k\leq i} \sigma^x_k= \prod_{j\leq i} (\sigma^x_j)^2=1
+\end{equation}
+\begin{equation}
+    \acomm{\mu^x_{i+1/2}}{\mu^z_{i+1/2}}=\sigma^z_i \sigma^z_{i+1} \prod_{j\leq i} \sigma^x_j + \prod_{j\leq i} \sigma^x_j \sigma^z_i \sigma^z_{i+1}=\acomm{\sigma^z_i}{\sigma^x_i} \sigma^z_{i+1} \prod_{j<i} \sigma^x_j=0
+\end{equation}
+For $i+1/2\neq j+1/2$, we have
+\begin{equation}
+    \comm{\mu^z_{i+1/2}}{\mu^z_{j+1/2}}=\comm{\prod_{k\leq i}\sigma^x_k}{\prod_{k\leq j}\sigma^x_k}=0
+\end{equation}
+For $\abs{i-j}>1$, obviously we have
+\begin{equation}
+    \comm{\mu^x_{i+1/2}}{\mu^x_{j+1/2}}=\comm{\sigma^z_i \sigma^z_{i+1}}{\sigma^z_j \sigma^z_{j+1}}=0
+\end{equation}
+\begin{equation}
+    \comm{\mu^x_{i+1/2}}{\mu^z_{j+1/2}}=\comm{\sigma^z_i \sigma^z_{i+1}}{\prod_{k\leq j}\sigma^x_k}=0
+\end{equation}
+
+\subsection*{(ii)}
 
 \section*{Problem 4}
 \subsection*{(a)}
@@ -77,6 +102,8 @@ For spins at different sites $i< j$, the commutation relation can be computed by
 \end{equation}
 this is because when $i<j$, the exponential factor $\me^{-\ii\pi\sum_{i\leq k<j}c_k^\dagger c_k}$ contains $c_i$ and $c_i^\dagger$, which anticommute with $c_j$ and $c_j^\dagger$. 
 
+
+\subsection*{(c)}
 
 %\bibliographystyle{jhep}
 %\bibliography{ref}
