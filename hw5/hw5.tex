@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage{jheppub,physics,amsfonts,graphicx,tensor,cleveref}
+\usepackage[export]{adjustbox}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand{\cd}{\mathcal{D}}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\sgn}{sgn}
+\counterwithout{equation}{section}
+
+
+\title{Homework 5}
+\author{Shangjie Zhou}
+\emailAdd{zhou1468@purdue.edu}
+\toccontinuoustrue
+\notoc
+
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Problem 1}
+
+
+\section*{Problem 2}
+
+
+\section*{Problem 3}
+
+\section*{Problem 4}
+\subsection*{(a)}
+If we use the following transformation:
+\begin{equation}
+    S_i^+=c_i^\dagger, S_i^-=c_i, S_i^z=c_i^\dagger c_i-\frac{1}{2}
+\end{equation}
+then the commutation relations of spin operators on the same site can be verified as:
+\begin{subequations}
+    \begin{align}
+        \comm{S_i^+}{S_i^-}&=\comm{c_i^\dagger}{c_i}= 2c_i^\dagger c_i-1=2S_i^z\\
+        \comm{S_i^z}{S_i^+}&=\comm{c_i^\dagger c_i-\frac{1}{2}}{c_i^\dagger}=c_i^\dagger=\ S_i^+\\
+        \comm{S_i^z}{S_i^-}&=\comm{c_i^\dagger c_i-\frac{1}{2}}{c_i}=-c_i=-S_i^-
+    \end{align}
+\end{subequations}
+For spins at different sites $i\neq j$, the commutation relation can be computed by using $\acomm{c_i^\dagger}{c_j}=0$:
+\begin{subequations}
+    \begin{align}
+        \comm{S_i^+}{S_j^-}&=\comm{c_i^\dagger}{c_j}=2c_i^\dagger c_j\neq 0\\
+        \comm{S_i^z}{S_j^+}&=\comm{c_i^\dagger c_i-\frac{1}{2}}{c_j^\dagger}=0\\
+        \comm{S_i^z}{S_j^-}&=\comm{c_i^\dagger c_i-\frac{1}{2}}{c_j}=0
+    \end{align}
+\end{subequations}
+So the transformation doesn't preserve the commutation relations between spins at different sites.
+
+\subsection*{(b)}
+If we use the following transformation:
+\begin{equation}
+    S_i^+=c_i^\dagger \me^{\ii \pi \sum_{k<i} c_k^\dagger c_k},\quad S_i^-= \me^{-\ii \pi \sum_{k<i} c_k^\dagger c_k} c_i,\quad S_i^z=c_i^\dagger c_i-\frac{1}{2}
+\end{equation}
+then the commutation relations of spin operators on the same site can be verified as:
+\begin{subequations}
+    \begin{align}
+        \comm{S_i^+}{S_i^-}&= \me^{\ii \pi \sum_{k<i} c_k^\dagger c_k} \comm{c_i^\dagger}{c_i} \me^{-\ii \pi \sum_{k<i} c_k^\dagger c_k}=2c_i^\dagger c_i-1=2S_i^z\\
+        \comm{S_i^z}{S_i^+}&=\comm{c_i^\dagger c_i-\frac{1}{2}}{c_i^\dagger} \me^{\ii \pi \sum_{k<i} c_k^\dagger c_k}=c_i^\dagger \me^{\ii \pi \sum_{k<i} c_k^\dagger c_k}=\ S_i^+\\
+        \comm{S_i^z}{S_i^-}&=\me^{-\ii \pi \sum_{k<i} c_k^\dagger c_k}\comm{c_i^\dagger c_i-\frac{1}{2}}{c_i}=-c_i \me^{-\ii \pi \sum_{k<i} c_k^\dagger c_k}=-S_i^-
+    \end{align}
+\end{subequations}
+For spins at different sites $i< j$, the commutation relation can be computed by using $\acomm{c_i^\dagger}{c_j}=0$:
+\begin{equation}
+    \begin{split}
+        \comm{S_i^+}{S_j^-}&=\comm{c_i^\dagger \me^{\ii\pi\sum_{k<i}c_k^\dagger c_k}}{\me^{-\ii\pi\sum_{k<j}c_k^\dagger c_k} c_j}\\
+                           &=c_i^\dagger \me^{-\ii\pi\sum_{i\leq k<j}c_k^\dagger c_k} c_j-\me^{-\ii\pi\sum_{i\leq k<j}c_k^\dagger c_k} c_j c_i^\dagger\\
+                           &=\comm{c_i^\dagger}{c_j \me^{-\ii\pi\sum_{i\leq k<j}c_k^\dagger c_k}}\\
+                           &=
+    \end{split}
+\end{equation}
+this is because when $i<j$, the exponential factor $\me^{-\ii\pi\sum_{i\leq k<j}c_k^\dagger c_k}$ contains $c_i$ and $c_i^\dagger$, which anticommute with $c_j$ and $c_j^\dagger$. 
+
+
+%\bibliographystyle{jhep}
+%\bibliography{ref}
+\end{document}
