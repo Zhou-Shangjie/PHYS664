@@ -22,14 +22,141 @@
 
 
 \section*{Problem 1}
+The partition function of the 2D Ising model can be written as
+\begin{equation}
+    Z=\sum_{\{\sigma\}}\exp(K\sum_{i,j}\sigma_i \sigma_j+L\sum_{i,k}\sigma_i \sigma_j)
+\end{equation}
+where the temperature has been absorbed into the coupling constants $K$ and $L$.
 
+In the high-temperature limit, we expand around the states with random spins.
+By using the identity
+\begin{equation}
+    \exp(K \sigma_i \sigma_j)=\cosh(K) \left[1+\sigma_i \sigma_j \tanh(K)\right]
+\end{equation}
+and 
+\begin{equation}
+    \exp(L \sigma_i \sigma_k)=\cosh(L) \left[1+\sigma_i \sigma_k \tanh(L)\right]
+\end{equation}
+we can rewrite the partition function as
+\begin{equation}
+    \begin{split}
+        Z&=\sum_{\{\sigma\}} \prod_{i,j} \cosh(K) \left[1+\sigma_i \sigma_j \tanh(K)\right] \prod_{i,k} \cosh(L) \left[1+\sigma_i \sigma_k \tanh(L)\right]\\
+         &= (\cosh K)^{N_b^h} (\cosh L)^{N_b^v} \sum_{\{\sigma\}} \prod_{i,j} \left[1+\sigma_i \sigma_j \tanh(K)\right] \prod_{i,k} \left[1+\sigma_i \sigma_k \tanh(L)\right]
+    \end{split}
+\end{equation}
+where $N_b^h$ and $N_b^v$ are the number of horizontal and vertical bonds respectively.
+When we expand the products, each term can be represented by a graph on the lattice, where each bond $\sigma_i \sigma_j$ or $\sigma_i \sigma_k$ corresponds to an edge in the graph.
+A general term in the expansion can be written as
+\begin{equation}
+    (\tanh K)^{r_h} (\tanh L)^{r_v} \sigma_1^{n_1} \sigma_2^{n_2} \cdots \sigma_N^{n_N}
+\end{equation}
+where $r_h$ and $r_v$ are the number of horizontal and vertical edges in the graph respectively, and $n_i$ is the degree of vertex $i$ in the graph
+When we sum over all spin configurations, only those terms with even $n_i$ for all vertices will contribute, and these terms correspond to closed loops on the lattice.
+Thus the partition function can be written as
+\begin{equation}\label{high_temp}
+    Z=2^N (\cosh K)^{N_b^h} (\cosh L)^{N_b^v} \sum_{\text{closed loops}} (\tanh K)^{r_h} (\tanh L)^{r_v}
+\end{equation}
+where $N$ is the number of vertices in the lattice.
+\vfill
+\newpage
+In the low-temperature limit, we should expand around the states with all spins up or down.
+The partition function can be written as
+\begin{equation}
+    Z=\sum_{\{\sigma\}} \exp\left[K (N_b^h - 2r_h)+L (N_b^v - 2r_v)\right]
+\end{equation}
+where $r_h$ and $r_v$ are the number of broken horizontal and vertical bonds respectively.
+If we put the lattice on a dual lattice and draw edges on the dual lattice crossing the antialigned bonds, these edges will also form closed loops.
+Thus the partition function can be written as
+\begin{equation}\label{low_temp}
+    Z=2\exp\left[K N_b^h + L N_b^v\right] \sum_{\text{closed loops}} \exp(-2K r_h - 2L r_v)
+\end{equation}
+where the factor of 2 comes from the two ground states with all spins up or down.
+
+By comparing \cref{high_temp} and \cref{low_temp}, we can find the duality relations:
+\begin{equation}
+    \exp(-2K^*)=\tanh L, \quad \exp(-2L^*)=\tanh K
+\end{equation}
+and the partition functions are related by
+\begin{equation}
+    \frac{Z(K,L)}{2^N (\cosh K)^{N_b^h} (\cosh L)^{N_b^v}}=\frac{Z(K^*,L^*)}{2 \exp\left[K^* N_b^h + L^* N_b^v\right]}
+\end{equation}
+which can be rearranged to give
+\begin{equation}
+    Z(K,L)=2^{-1} (\sinh 2K^*)^{N_b^h/2} (\sinh 2L^*)^{N_b^v/2} Z(K^*,L^*)
+\end{equation}
+
+In the isotropic case, the critical point can be found from the self-dual condition $K=K^*=L=L^*$, which gives
+\begin{equation}
+    \sinh(2K_c)=1
+\end{equation}
 
 \section*{Problem 2}
+\subsection*{(a)}
+The partition function of the transverse-field Ising model can be written as 
+\begin{equation}
+    Z=\Tr\exp(\beta J \sum_{i=1}^N \sigma^z_i \sigma^z_{i+1} + \beta h \sum_{i=1}^N \sigma^x_i)
+\end{equation}
+and by using the Trotter formula 
+\begin{equation}
+    \exp(A+B)=\lim_{M\to \infty} \left(\exp\left(\frac{A}{M}\right) \exp\left(\frac{B}{M}\right)\right)^M
+\end{equation}
+we have 
+\begin{equation}
+    Z=\lim_{M\to \infty} \Tr \left[\exp\left(\frac{\beta J}{M} \sum_{i=1}^N \sigma^z_i \sigma^z_{i+1}\right) \exp\left(\frac{\beta h}{M} \sum_{i=1}^N \sigma^x_i\right)\right]^M
+\end{equation}
 
+\subsection*{(b)}
+After inserting complete sets of $\sigma^z$ basis states between each exponential factor, the partition function can be written as
+\begin{equation}
+    Z=\lim_{M\to \infty} \sum_{\{s_i=\pm 1\}} \prod_{n=1}^M \mel**{s_{1},s_{2},\cdots,s_{N}}{\exp\left(\frac{\beta J}{M} \sum_{i=1}^N \sigma^z_i \sigma^z_{i+1}\right) \exp\left(\frac{\beta h}{M} \sum_{i=1}^N \sigma^x_i\right)}{s_1,s_2,\cdots,s_{N}}
+\end{equation}
+
+\subsection*{(c)}
+The diagonal matrix element can be computed as
+\begin{equation}
+    \mel**{s_{1},s_{2},\cdots,s_{N}}{\exp\left(\frac{\beta J}{M} \sum_{i=1}^N \sigma^z_i \sigma^z_{i+1}\right)}{s_1,s_2,\cdots,s_{N}}=\exp\left(\frac{\beta J}{M} \sum_{i=1}^N s_i s_{i+1}\right)
+\end{equation}
+and we can define the coupling constant in the spatial direction as
+\begin{equation}
+    K_s=\frac{\beta J}{M}.
+\end{equation}
+To compute the other matrix element, we can use the identity
+\begin{equation}
+    \exp(a \sigma^x)=\cosh(a) + \sigma^x \sinh(a)
+\end{equation}
+thus we have
+\begin{equation}
+    \begin{split}
+        &\mel**{s_{1},s_{2},\cdots,s_{N}}{\exp\left(\frac{\beta h}{M} \sum_{i=1}^N \sigma^x_i\right)}{s_1',s_2',\cdots,s_{N}'}\\
+        =&\prod_{i=1}^N \mel**{s_i}{\exp\left(\frac{\beta h}{M} \sigma^x_i\right)}{s_i'}\\
+        =&\prod_{i=1}^N \left[\cosh\left(\frac{\beta h}{M}\right) \delta_{s_i,s_i'} + \sinh\left(\frac{\beta h}{M}\right) (1-\delta_{s_i,s_i'})\right]\\
+        =&\prod_{i=1}^N \left[\frac{1}{2} \sinh\left(\frac{2\beta h}{M}\right)\right]^{1/2} \exp\left[\frac{1}{2} \ln \coth\left(\frac{\beta h}{M}\right) s_i s_i'\right]
+    \end{split}
+\end{equation}
+and we can define the coupling constant in the imaginary time direction as
+\begin{equation}
+    K_\tau=\frac{1}{2} \ln \coth\left(\frac{\beta h}{M}\right)
+\end{equation}
+\subsection*{(d)}
+Combining the results above, the partition function can be written as
+\begin{equation}
+    Z=\lim_{M\to \infty} \sum_{\{s_{i,n}=\pm 1\}} \exp\left(\sum_{n=1}^M \sum_{i=1}^N \left[K_s s_{i,n} s_{i+1,n} + K_\tau s_{i,n} s_{i,n+1}\right]\right)
+\end{equation}
+which is the partition function of a 2D classical Ising model with anisotropic couplings $K_s$ and $K_\tau$.
+
+\subsection*{(e)}
+Using the known critical point of the 2D classical Ising model
+\begin{equation}
+    \sinh(2K_s) \sinh(2K_\tau)=1
+\end{equation}
+we can find the critical point of the transverse-field Ising model by substituting the expressions of $K_s$ and $K_\tau$:
+\begin{equation}
+    \sinh\left(\frac{2\beta_c J}{M}\right) \sinh\left(\ln \coth\left(\frac{\beta_c h}{M}\right)\right)=1
+\end{equation}
 
 \section*{Problem 3}
-\subsection*{(i)}
-\subsubsection*{(a)}
+\subsection*{(a)}
+\subsubsection*{(i)}
 We can directly verify that 
 \begin{equation}
     (\mu^x_{i+1/2})^2=\sigma^z_i \sigma^z_{i+1} \sigma^z_i \sigma^z_{i+1}=(\sigma^z_i)^2(\sigma^z_{i+1})^2=1
@@ -42,17 +169,62 @@ We can directly verify that
 \end{equation}
 For $i+1/2\neq j+1/2$, we have
 \begin{equation}
-    \comm{\mu^z_{i+1/2}}{\mu^z_{j+1/2}}=\comm{\prod_{k\leq i}\sigma^x_k}{\prod_{k\leq j}\sigma^x_k}=0
-\end{equation}
-For $\abs{i-j}>1$, obviously we have
-\begin{equation}
     \comm{\mu^x_{i+1/2}}{\mu^x_{j+1/2}}=\comm{\sigma^z_i \sigma^z_{i+1}}{\sigma^z_j \sigma^z_{j+1}}=0
+\end{equation}
+\begin{equation}
+    \comm{\mu^z_{i+1/2}}{\mu^z_{j+1/2}}=\comm{\prod_{k\leq i}\sigma^x_k}{\prod_{k\leq j}\sigma^x_k}=0
 \end{equation}
 \begin{equation}
     \comm{\mu^x_{i+1/2}}{\mu^z_{j+1/2}}=\comm{\sigma^z_i \sigma^z_{i+1}}{\prod_{k\leq j}\sigma^x_k}=0
 \end{equation}
 
-\subsection*{(ii)}
+A special case happens when $i=1,j=2$,
+\begin{equation}
+    \comm{\mu^x_{i+1/2}}{\mu^z_{j+1/2}}=\comm{\sigma^z_i \sigma^z_{i+1}}{\prod_{k\leq j}\sigma^x_k}=\comm{\sigma^z_1 \sigma^z_2}{\sigma^x_1 \sigma^x_2}=\sigma^z_1\sigma^z_2 \sigma^x_1 \sigma^x_2 - \sigma^x_1 \sigma^x_2 \sigma^z_1 \sigma^z_2=0
+\end{equation}
+where we used $\acomm{\sigma^x}{\sigma^z}=0$ on the same site.
+
+\subsubsection*{(ii)}
+We can directly verify the inverse transformation as:
+\begin{equation}
+    \mu^z_{i-1/2} \mu^z_{i+1/2}=\prod_{j\leq i-1} \sigma^x_j \prod_{k\leq i} \sigma^x_k=\sigma^x_i
+\end{equation}
+and
+\begin{equation}
+    \sigma^z_i \sigma^z_{i+1}=\mu^x_{i+1/2}
+\end{equation}
+
+
+\subsection*{(b)}
+After using the inverse relations, the Hamiltonian can be written as 
+\begin{equation}
+    \begin{split}
+        H&=-J \sum_{i=1}^{N-1}\sigma^z_i \sigma^z_{i+1}-h\sum_{i=1}^N \sigma^x_i\\
+            &=-J \sum_{i=1}^{N-1} \mu^x_{i+1/2}-h\sum_{i=1}^N \mu^z_{i-1/2} \mu^z_{i+1/2}\\
+            &= -J \sum_{i=1}^{N-1} \mu^x_{i+1/2}-h\sum_{i=1}^N \mu^z_{i-1/2} \mu^z_{i+1/2}
+    \end{split}
+\end{equation}
+
+\subsection*{(c)}
+After this transformation, the role of $J$ and $h$ are exchanged.
+
+\subsection*{(d)}
+When $J\gg h$, the original model is in the ordered ferromagnetic phase.
+In the dual model, this corresponds to $h\gg J$, which is in the disordered paramagnetic phase.
+
+\subsection*{(e)}
+When $h=J$, the model is self-dual and this point is the critical point of the phase transition.
+
+\subsection*{(f)}
+Since the degrees of freedom are defined on the bonds of the original lattice, the dual lattice has $N-1$ sites if the original lattice has $N$ sites.
+
+\subsection*{(g)}
+When periodic boundary condition is imposed, there will be $N$ bonds in total.
+Thus we can define $N$ dual spins $\mu^z_{i+1/2}$ and $\mu^x_{i+1/2}$, with $i=1,2,\cdots,N$. The definition of $\mu^x_{i+1/2}$ and $\mu^z_{i+1/2}$ remains unchanged.
+However, there will be a constraint on the bonds:
+\begin{equation}
+    \prod_{i=1}^N \mu^x_{i+1/2}=\prod_{i=1}^N \sigma^z_i \sigma^z_{i+1}=(\sigma^z_1)^2 (\sigma^z_2)^2 \cdots (\sigma^z_N)^2=1
+\end{equation}
 
 \section*{Problem 4}
 \subsection*{(a)}
@@ -91,19 +263,39 @@ then the commutation relations of spin operators on the same site can be verifie
         \comm{S_i^z}{S_i^-}&=\me^{-\ii \pi \sum_{k<i} c_k^\dagger c_k}\comm{c_i^\dagger c_i-\frac{1}{2}}{c_i}=-c_i \me^{-\ii \pi \sum_{k<i} c_k^\dagger c_k}=-S_i^-
     \end{align}
 \end{subequations}
-For spins at different sites $i< j$, the commutation relation can be computed by using $\acomm{c_i^\dagger}{c_j}=0$:
+For spins at different sites $i< j$, the commutation relation can be computed as:
 \begin{equation}
     \begin{split}
         \comm{S_i^+}{S_j^-}&=\comm{c_i^\dagger \me^{\ii\pi\sum_{k<i}c_k^\dagger c_k}}{\me^{-\ii\pi\sum_{k<j}c_k^\dagger c_k} c_j}\\
-                           &=c_i^\dagger \me^{-\ii\pi\sum_{i\leq k<j}c_k^\dagger c_k} c_j-\me^{-\ii\pi\sum_{i\leq k<j}c_k^\dagger c_k} c_j c_i^\dagger\\
-                           &=\comm{c_i^\dagger}{c_j \me^{-\ii\pi\sum_{i\leq k<j}c_k^\dagger c_k}}\\
-                           &=
-    \end{split}
+                           &=c_i^\dagger \me^{\ii\pi\sum_{k<i}c_k^\dagger c_k} \me^{-\ii\pi\sum_{k<j}c_k^\dagger c_k} c_j - \me^{-\ii\pi\sum_{k<j}c_k^\dagger c_k} c_j c_i^\dagger \me^{\ii\pi\sum_{k<i}c_k^\dagger c_k}\\
+                           &=c_i^\dagger \me^{\ii\pi\sum_{i\leq k<j}c_k^\dagger c_k} c_j - c_j \me^{\ii\pi\sum_{i\leq k<j}c_k^\dagger c_k}c_i^\dagger\\
+                           &=\left(c_i^\dagger \me^{\ii\pi c_i^\dagger c_i}c_j-c_j\me^{\ii\pi c_i^\dagger c_i} c_i^\dagger\right) \me^{\ii\pi\sum_{i< k<j}c_k^\dagger c_k}\\
+                           &=\left(c_i^\dagger c_j-c_j\me^{\ii\pi(1-c_i c_i^\dagger)}c_i^\dagger\right) \me^{\ii\pi\sum_{i< k<j}c_k^\dagger c_k}\\
+                           &=\left(c_i^\dagger c_j+c_j\me^{-\ii\pi c_i c_i^\dagger}c_i^\dagger\right) \me^{\ii\pi\sum_{i< k<j}c_k^\dagger c_k}\\
+                           &=\left(c_i^\dagger c_j+c_j c_i^\dagger\right) \me^{\ii\pi\sum_{i< k<j}c_k^\dagger c_k}\\
+                           &=\acomm{c_i^\dagger}{c_j} \me^{\ii\pi\sum_{i< k<j}c_k^\dagger c_k}\\
+                            &=0
+    \end{split}         
 \end{equation}
-this is because when $i<j$, the exponential factor $\me^{-\ii\pi\sum_{i\leq k<j}c_k^\dagger c_k}$ contains $c_i$ and $c_i^\dagger$, which anticommute with $c_j$ and $c_j^\dagger$. 
-
+and other commutation relations can be verified similarly.
 
 \subsection*{(c)}
+The XXZ spin Hamiltonian
+\begin{equation}
+    H=- \sum_i \left[J_\perp  \left( S_i^x S_{i+1}^x + S_i^y S_{i+1}^y \right)+ J_Z S_i^z S_{i+1}^z\right]
+\end{equation}
+can be written in terms of $S_i^\pm$ as
+\begin{equation}
+    H=- \sum_i \left[\frac{J_\perp}{2}  \left( S_i^+ S_{i+1}^- + S_i^- S_{i+1}^+ \right)+ J_Z S_i^z S_{i+1}^z\right]
+\end{equation}
+After Jordan-Wigner transformation, we have
+\begin{equation}
+    \begin{split}
+        H=&- \sum_i \left[\frac{J_\perp}{2}  \left( c_i^\dagger \me^{\ii \pi \sum_{k<i} c_k^\dagger c_k} \me^{-\ii \pi \sum_{k<i+1} c_k^\dagger c_k} c_{i+1} + c_{i+1}^\dagger \me^{\ii \pi \sum_{k<i+1} c_k^\dagger c_k} \me^{-\ii \pi \sum_{k<i} c_k^\dagger c_k} c_i \right)\right.\\
+        &\left.+ J_Z \left(c_i^\dagger c_i -\frac{1}{2}\right)\left(c_{i+1}^\dagger c_{i+1} -\frac{1}{2}\right)\right]\\
+        =&- \sum_i \left[\frac{J_\perp}{2}  \left( c_i^\dagger c_{i+1} + c_{i+1}^\dagger c_i \right)+ J_Z \left(c_i^\dagger c_i -\frac{1}{2}\right)\left(c_{i+1}^\dagger c_{i+1} -\frac{1}{2}\right)\right]
+    \end{split}
+\end{equation}
 
 %\bibliographystyle{jhep}
 %\bibliography{ref}
